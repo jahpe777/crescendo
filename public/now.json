@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "alias": "james-crescendo",
+    "name": "crescendo",
+    "routes": [
+        { "handle": "filesystem" },
+        { "src": "/.*", "dest": "/index.html" }
+    ]
+  }

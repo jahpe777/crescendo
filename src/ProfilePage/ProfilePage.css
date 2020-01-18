@@ -1,0 +1,32 @@
+.profile {
+    font-size: 60px;
+    margin-bottom: 100px;
+}
+
+h2 {
+    font-size: 40px;
+    margin: 20px;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 30px;
+    margin: 20px;
+    font-weight: normal;
+}
+
+form {
+    margin: 30px;
+}
+
+input {
+    height: 30px;
+    width: 210px;
+    font-size: 20px;
+    color: skyblue;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 20px;
+    color: skyblue;
+}

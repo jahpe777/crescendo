@@ -1,0 +1,29 @@
+.mailing {
+    margin: 20px;
+}
+
+form {
+    margin: 30px;
+}
+
+button {
+    margin: 50px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+}
+
+input {
+    height: 30px;
+    width: 210px;
+    font-size: 20px;
+    color: skyblue;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 20px;
+    color: skyblue;
+}
+
+    
+   
