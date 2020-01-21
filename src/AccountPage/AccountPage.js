@@ -9,7 +9,9 @@ class AccountPage extends Component {
         <section className='image-accountPage'>
               <div>
                 <h1 className='account-create'>Create Account</h1>
-                <p className='account-explore'>Already have an account? Sign In</p>
+                <p className='account-explore'>Already have an account? 
+                    <Link to='/login' type='submit'> Sign In</Link>
+                </p>
               </div>
 
             <form 

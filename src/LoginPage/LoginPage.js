@@ -9,7 +9,9 @@ class LoginPage extends Component {
         <section className='image-loginPage'>
             <div>
                 <h1 className='account-create'>Log In</h1>
-                <p className='account-explore'>Don't have an account? Create account</p>
+                <p className='account-explore'>Don't have an account? 
+                    <Link to='/account' type='submit'> Create account</Link>
+                </p>
             </div>
 
             <form 

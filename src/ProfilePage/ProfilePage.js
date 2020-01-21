@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import BandContext from '../Context/BandContext';
+import BandContext from '../Context/Context';
 import './ProfilePage.css';
 
 class ProfilePage extends Component {
@@ -17,22 +17,22 @@ class ProfilePage extends Component {
 
     showsHandleSubmit = e => {
         e.preventDefault();
-        const newShow = {
+        const show = {
             date: e.target.date.value, 
             venue: e.target.venue.value, 
             city: e.target.city.value
         }
-        this.context.addNewShow(newShow);
+        this.context.addNewShow(show);
         e.target.reset();
     }
 
     youtubehandleSubmit = e => {
         e.preventDefault();
-        const video = e.target.bandVideo.value;
-        if(!video.includes('youtube')){
+        const newVideo = e.target.bandVideo.value;
+        if(!newVideo.includes('youtube')){
             alert('Only YouTube URL links are valid');
         } else {
-            this.context.addNewShow(newShow);
+            this.context.addNewVideo(newVideo);
             e.target.reset();
         }
     }

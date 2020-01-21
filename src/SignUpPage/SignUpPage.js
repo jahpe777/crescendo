@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './SignUpPage.css';
-import BandContext from '../Context/BandContext';
+import BandContext from '../Context/Context';
 
 class SignUpPage extends Component {
     static contextType = BandContext;
     
-    handleSubmit = event => {
+    emailHandleSubmit = event => {
         event.preventDefault();
         const email = event.target.email.value;
         this.context.addNewSubscriber(email);
@@ -28,7 +28,7 @@ class SignUpPage extends Component {
                 <form 
                     className='signup-form' 
                     ref={ form => this.form = form } 
-                    onSubmit={ this.handleSubmit }
+                    onSubmit={ this.emailHandleSubmit }
                 >
                     <p><label htmlFor="email">Email: </label>
                         <input placeholder="johnsmith@gmail.com" type="email" required name='email' id='email' /></p>
