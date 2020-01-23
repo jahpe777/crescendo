@@ -16,7 +16,7 @@ import ListenPage from './ListenPage/ListenPage';
 import ShowsPage from './ShowsPage/ShowsPage';
 import SignUpPage from './SignUpPage/SignUpPage';
 
-import BandContext from './Context/Context';
+import Context from './Contexts/Context';
 // import config from './config'
 
 class App extends Component {
@@ -24,6 +24,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      authToken: false,
       // shows: [],
       // subscribers: [],
       // videos: [
@@ -33,18 +34,6 @@ class App extends Component {
       //     venue: 'Los Globos',
       //     city: 'Los Angeles, CA'
       //   },
-      //   {
-      //     id: 2,
-      //     date: "January 10 2020",
-      //     venue: 'The Echo',
-      //     city: 'Los Angeles, CA' 
-      //   },
-      //   {
-      //     id: 3,
-      //     date: "February 12 2020",
-      //     venue: 'The Smell',
-      //     city: 'Los Angeles, CA'
-      //   }
       // ],
       shows: [
         {
@@ -62,10 +51,35 @@ class App extends Component {
         }
       ],
 
-      // addNewShow: show => { 
-      //   const newShow = { id:uuidv4(), date, venue, city }
-      //   this.setState({ shows:[...this.state.shows, newShow ]})
-      // },
+      addNewShow: show => { 
+        const { date, venue, city } = show;
+        const newShow = { id:uuidv4(), date, venue, city }
+        this.setState({ shows:[...this.state.shows, newShow ]})
+      },
+
+      login: (e, cb) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        // fetch call to the backend to post this user & pass
+        // res=>res.json()
+        // .then(resJson=>{
+        // const { authToken } = resJson;
+        // window.localStorage.setItem('authToken', authToken);
+        // this.setState({ authToken })
+        // TEMP:
+            window.localStorage.setItem('authToken', true);
+            this.setState({ authToken: true });
+            cb();
+        // })
+      },
+
+      logout: (e, cb) => {
+        e.preventDefault();
+        window.localStorage.removeItem('authToken');
+        this.setState({ authToken: false });
+        cb();
+      },
 
       // addNewVideo: video => {
       //   const newVideo = { id:uuidv4(), date, venue, city }
@@ -73,13 +87,14 @@ class App extends Component {
       // },
 
       // addNewShow: show => {
-      //   fetch(`${config.API_ENDPOINT}/api/shows`, {
+      //   fetch(`${ config.API_ENDPOINT}/api/shows`, {
       //     headers: {
-      //         'Content-Type': 'application/json'
+      //         'Content-Type': 'application/json',
+      //         'Authorization': `Bearer ${ this.state.authToken }`
       //     },
       //     method: 'POST',
       //     body: JSON.stringify({ show })
-      //     // { show } {show:show}
+      //     // { show } { show:show }
       //     // JSON.stringify(show)
       //   })
       //   .then(res=>res.json())
@@ -97,7 +112,7 @@ class App extends Component {
     }
   }
   //     addNewSubscriber: email => {
-  //       fetch(`${config.API_ENDPOINT}/api/emails`, {
+  //       fetch(`${ config.API_ENDPOINT}/api/emails`, {
   //         headers: {
   //             'Content-Type': 'application/json'
   //         },
@@ -113,8 +128,11 @@ class App extends Component {
   // }
 
   componentDidMount() {
+      this.setState({
+        authToken: window.localStorage.getItem('authToken')
+      });
   //   // need to fetch the BE to get all shows from the database
-  //   fetch(`${config.API_ENDPOINT}/api/shows`, {
+  //   fetch(`${ config.API_ENDPOINT}/api/shows`, {
   //     method: 'GET',
   //     headers: {
   //       'content-type': 'application/json',
@@ -137,7 +155,7 @@ class App extends Component {
 
   render() {
     return (
-      <BandContext.Provider value={ this.state }>
+      <Context.Provider value={ this.state }>
         <div className = 'App'>
           <header className = 'App-Header'>
             <Route path='/' component={ NavBar }/> 
@@ -157,7 +175,7 @@ class App extends Component {
             <Route path='/' component={ Footer }/> 
           </footer>
         </div>
-      </BandContext.Provider>
+      </Context.Provider>
     );
   }
 }

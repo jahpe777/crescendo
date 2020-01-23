@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './SignUpPage.css';
-import BandContext from '../Context/Context';
+import Context from '../Contexts/Context';
 
 class SignUpPage extends Component {
-    static contextType = BandContext;
+    static contextType = Context;
     
     emailHandleSubmit = event => {
         event.preventDefault();

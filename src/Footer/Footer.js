@@ -3,18 +3,13 @@ import Context from '../Contexts/Context';
 import './Footer.css';
 
 class Footer extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            user: 'member'
-        };
-    }
+    
+    static contextType = Context;
 
     render() {
         return (
             <section className='footer'>
-                {this.state.user === 'member' ? (
+                {this.context.authToken ? (
                     <ul className='links'>
                         <li>
                             <a target='_blank' rel='noopener noreferrer' href='https://www.facebook.com/GhostPavilion'>

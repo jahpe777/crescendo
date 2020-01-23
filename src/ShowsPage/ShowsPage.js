@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './ShowsPage.css';
-import BandContext from '../Context/Context';
+import Context from '../Contexts/Context';
 
 class ShowsPage extends Component {
-    static contextType = BandContext;
+    static contextType = Context;
 
     render() {
         return (
-            <BandContext.Consumer>
+            <Context.Consumer>
                 {(value) => (
                     <div className='showspage'>
                     <section className='image-showspage'>
@@ -22,7 +22,7 @@ class ShowsPage extends Component {
                     </section>
                     </div>
                 )}  
-            </BandContext.Consumer>
+            </Context.Consumer>
 
 
             // <div className='showspage'>

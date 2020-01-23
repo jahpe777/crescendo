@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import BandContext from '../Context/Context';
+import Context from '../Contexts/Context';
 import './ProfilePage.css';
 
 class ProfilePage extends Component {
 
-    static contextType = BandContext;
+    static contextType = Context;
 
     constructor(props){
         super(props);
 
-        if(!window.localStorage.getItem('loggedIn')){
+        if(!window.localStorage.getItem('authToken')){
             this.props.history.push('/');
         }
     }
