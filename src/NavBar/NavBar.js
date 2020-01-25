@@ -5,6 +5,7 @@ import './NavBar.css';
 import Context from '../Contexts/Context';
 
 class NavBar extends React.Component {
+    
     static contextType = Context;
 
     render(){

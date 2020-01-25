@@ -14,7 +14,7 @@ class LandingPage extends Component {
                   create, design, manage, and develop your own website.</p>
               </div>
               <Link to='/account' type='submit'>
-                <p><button className='landing-button'>Create Account</button></p>
+                <button className='landing-button'>Create Account</button>
               </Link>
         </section>
       </div>
