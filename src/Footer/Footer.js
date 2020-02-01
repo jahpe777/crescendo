@@ -3,53 +3,25 @@ import Context from '../Contexts/Context';
 import './Footer.css';
 
 class Footer extends Component {
-    
+
     static contextType = Context;
 
     render() {
         return (
+            
             <section className='footer'>
-                {this.context.authToken ? (
-                    <ul className='links'>
-                        <li>
-                            <a target='_blank' rel='noopener noreferrer' href='https://www.facebook.com/GhostPavilion'>
-                                <img className='icons' alt='facebook' src='images/facebook.png' />
+            <ul className='links'>
+                {this.context.authToken ? Object.keys(this.context.link).map(key=>(
+                        this.context.link[key]!='' ? <li>
+                            <a target='_blank' rel='noopener noreferrer' href= { this.context.link[key] }>
+                                <img className='icons' alt={key} src={`images/${key}.png`} />
                             </a>
-                        </li>
-                        <li>
-                            <a target='_blank' rel='noopener noreferrer' href='https://www.twitter.com/ghost_pavilion'>
-                                <img className='icons' alt='twitter' src='images/twitter.png' />
-                            </a>
-                        </li>
-                        <li>
-                            <a target='_blank' rel='noopener noreferrer' href='https://www.instagram.com/ghost_pavilion'>
-                                <img className='icons' alt='instagram' src='images/instagram.png' />   
-                            </a>
-                        </li>
-                        <li>
-                            <a target='_blank' rel='noopener noreferrer' href='https://www.youtube.com/channel/UCr56a0HjTtBCzkTu1rgRQWg'>
-                                <img className='icons' alt='youtube' src='images/youtube.png' />
-                            </a>
-                        </li>
-                        <li>
-                            <a target='_blank' rel='noopener noreferrer' href='https://soundcloud.com/ghost-pavilion'>
-                                <img className='icons' alt='soundcloud' src='images/soundcloud.png' />   
-                            </a>
-                        </li>
-                        <li>
-                            <a target='_blank' rel='noopener noreferrer' href='https://ghostpavilion.bandcamp.com/'>
-                                <img className='icons' alt='bandcamp' src='images/bandcamp.png' />
-                            </a>
-                        </li>
-                        <li>
-                            <a target='_blank' rel='noopener noreferrer' href='mailto:info@ghostpavilion.com'>
-                                <img className='icons' alt='email' src='images/email.png' />
-                            </a>
-                        </li>
-                    </ul>
-                ) : ('')}
+                        </li> : ''
+                )) : ('')}
+                </ul>
             </section>
-        )};
+        );
     }
+}
 
 export default Footer;

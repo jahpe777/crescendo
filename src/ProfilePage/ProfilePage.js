@@ -20,20 +20,21 @@ class ProfilePage extends Component {
         const image = {
             value: e.target.bandImage.value
         }
-        if(!image.includes('https')) {
-            alert('Only valid URL links are allowed');
-        } else {
+        if(image.value.includes('jpg' || 'png')) {
             this.context.addNewImage(image);
             e.target.reset();
+        } else {
+            alert('Only valid image links (jpg, png) are allowed');
         }
     }
+    
 
     videosHandleSubmit = e => {
         e.preventDefault();
         const video = {
             value: e.target.bandVideo.value,
         }
-        if (e.target.bandVideo.value.includes('youtube')) {
+        if(video.value.includes('youtube')) {
             this.context.addNewVideo(video);
             e.target.reset();
         } else {
@@ -46,11 +47,11 @@ class ProfilePage extends Component {
         const song = {
             value: e.target.bandAudio.value,
         }
-        if(!song.includes('bandcamp')) {
-            alert('Only Bandcamp URL links are valid');
-        } else {
+        if(song.value.includes('bandcamp')) {
             this.context.addNewSong(song);
             e.target.reset();
+        } else {
+            alert('Only Bandcamp URL links are valid');
         }
     }
 
@@ -74,55 +75,54 @@ class ProfilePage extends Component {
             youtube: e.target.youtube.value, 
             soundcloud: e.target.soundcloud.value, 
             bandcamp: e.target.bandcamp.value,
-            email: e.target.email.value,
+            email: e.target.email.value!='' ? 'mailto:'+e.target.email.value : '',
         }
-        if(!link.includes('facebook' || 'twitter' || 'instagram' || 'youtube' || 'soundcloud' || 'bandcamp' || '@')) {
-            alert('Only URL links from (Facebook, Twitter, Instagram, YouTube, Soundcloud, Bandcamp, Email) are valid');
-        } else {
+       
             this.context.addNewLink(link);
             e.target.reset();
-        }
+        
     }
 
   render() {
+      const {link} = this.context;
     return (
       <div className='profilePage'>
         <section className='image-profilePage'>
             <h1 className='profile'>Profile</h1>
             <h2>Spanish Prisoners</h2>
         
-            <h3>Submit an image of your music project to get started</h3>
+            <h3>Submit an image of your music project</h3>
             <form 
                 className='band-image-form' 
                 ref={ form => this.form = form } 
                 onSubmit={ e => this.imagesHandleSubmit(e) }
             >
                 <p><label htmlFor='bandImage'>Image: </label>
-                    <input placeholder='https://d.newsweek.com/en/full/256665/walkmen.jpg' type='bandImage' required name='bandImage' id='bandImage' /></p>
+                    <input placeholder='https://d.newsweek.com/en/full/256665/walkmen.jpg' type='text' required name='bandImage' id='bandImage' /></p>
 
                 <p><button className='bandImage-button' type='submit'>Submit</button></p>
             </form>
 
-            <h3>Submit YouTube links to your music project's videos</h3>
+            <h3>Submit YouTube links for your music project</h3>
             <form 
                 className='band-video-form' 
                 ref={ form => this.form = form } 
                 onSubmit = { e => this.videosHandleSubmit(e) }
             >
                 <p><label htmlFor='bandVideo'>Videos: </label>
-                    <input placeholder='https://www.youtube.com/watch?v=0Xv3eTfjMT4' type='bandVideo' required name='bandVideo' id='bandVideo' /></p>
+                    <input placeholder='https://www.youtube.com/watch?v=0Xv3eTfjMT4' type='text' required name='bandVideo' id='bandVideo' /></p>
 
                 <p><button className='bandVideo-button' type='submit'>Submit</button></p>
             </form>
 
-            <h3>Submit Bandcamp links to your music project's audio</h3>
+            <h3>Submit Bandcamp embedded links for your music project</h3>
             <form 
                 className='band-audio-form' 
                 ref={ form => this.form = form } 
                 onSubmit={ e => this.songsHandleSubmit(e) }
             >
                 <p><label htmlFor='bandAudio'>Audio: </label>
-                    <input placeholder='https://spanishprisoners.bandcamp.com/track/slow-decay' type='bandAudio' required name='bandAudio' id='bandAudio' /></p>
+                    <input placeholder='https://bandcamp.com/EmbeddedPlayer/track=77723839/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/' type='text' required name='bandAudio' id='bandAudio' /></p>
 
                 <p><button className='bandAudio-button' type='submit'>Submit</button></p>
             </form>
@@ -143,33 +143,31 @@ class ProfilePage extends Component {
             <form 
                 className='band-social-form' 
                 ref={ form => this.form = form } 
-                onSubmit={ e => this.linkshandleSubmit(e) }
             >
                 <p><label htmlFor='bandSocial-Facebook'>Facebook: </label>
-                    <input placeholder='https://www.facebook.com/spanishprisoners/' type='bandSocial-Facebook' name='facebook' id='bandSocial-Facebook' /></p>
+                    <input placeholder='https://www.facebook.com/spanishprisoners/' type='text' name='facebook' id='bandSocial-Facebook' onChange={e=>this.context.updateLink('facebook',e.target.value)} value={link.facebook} /></p>
 
                 <p><label htmlFor='bandSocial-Twitter'>Twitter: </label>
-                    <input placeholder='https://twitter.com/Ghost_Pavilion' type='bandSocial-Twitter' name='twitter' id='bandSocial-Twitter' /></p>
+                    <input placeholder='https://twitter.com/Ghost_Pavilion' type='text' name='twitter' id='bandSocial-Twitter' onChange={e=>this.context.updateLink('twitter',e.target.value)} value={link.twitter} /></p>
 
                 <p><label htmlFor='bandSocial-Instagram'>Instagram: </label>
-                    <input placeholder='https://www.instagram.com/ghost_pavilion/' type='bandSocial-Instagram' name='instagram' id='bandSocial-Instagram' /></p>
+                    <input placeholder='https://www.instagram.com/ghost_pavilion/' type='text' name='instagram' id='bandSocial-Instagram' onChange={e=>this.context.updateLink('instagram',e.target.value)} value={link.instagram} /></p>
 
                 <p><label htmlFor='bandSocial-YouTube'>YouTube: </label>
-                    <input placeholder='https://www.youtube.com/channel/UCgUEdKWijDmFnR0rTKA42Vg' type='bandSocial-YouTube' name='youtube' id='bandSocial-YouTube' /></p>
+                    <input placeholder='https://www.youtube.com/channel/UCgUEdKWijDmFnR0rTKA42Vg' type='text' name='youtube' id='bandSocial-YouTube' onChange={e=>this.context.updateLink('youtube',e.target.value)} value={link.youtube} /></p>
 
                 <p><label htmlFor='bandSocial-SoundCloud'>SoundCloud: </label>
-                    <input placeholder='https://soundcloud.com/spanish-prisoners' type='bandSocial-SoundCloud' name='soundcloud' id='bandSocial-SoundCloud' /></p>
+                    <input placeholder='https://soundcloud.com/spanish-prisoners' type='text' name='soundcloud' id='bandSocial-SoundCloud' onChange={e=>this.context.updateLink('soundcloud',e.target.value)} value={link.soundcloud} /></p>
 
                 <p><label htmlFor='bandSocial-Bandcamp'>Bandcamp: </label>
-                    <input placeholder='https://spanishprisoners.bandcamp.com/' type='bandSocial-Bandcamp' name='bandcamp' id='bandSocial-Bandcamp' /></p>
+                    <input placeholder='https://spanishprisoners.bandcamp.com/' type='text' name='bandcamp' id='bandSocial-Bandcamp' onChange={e=>this.context.updateLink('bandcamp',e.target.value)} value={link.bandcamp} /></p>
 
                 <p><label htmlFor='bandSocial-Email'>Email: </label>
-                    <input placeholder='spanishprisoners@gmail.com' type='bandSocial-Email' name='email' id='band-Email' /></p>
-
-                <p><button className='bandSocial-button' type='submit'>Submit</button></p>
+                    <input placeholder='spanishprisoners@gmail.com' type='text' name='email' id='band-Email' onChange={e=>this.context.updateLink('email',`mailto:${e.target.value}`)} value={link.email.replace("mailto:","")} /></p>
+                <p>Links update on change</p>
             </form>
               
-            <div class='band-home-button'>
+            <div className='band-home-button'>
                 <section>
                     <h3>Click below to go to your home page</h3>
                     <Link to='/home' type='submit'>

@@ -27,23 +27,13 @@ class App extends Component {
 
       authToken: false,
 
-      images: [
-        {
-          value: 'https://ksr-ugc.imgix.net/assets/011/313/427/ad7a3b8185bd2298a69f3ebf6ca71453_original.jpg?ixlib=rb-2.1.0&crop=faces&w=1552&h=873&fit=crop&v=1463680841&auto=format&frame=1&q=92&s=8131764fdbf6e638cd6229bab59ec1a6'
-        }
-      ],
+      images: [],
       
-      videos: [
-        {
-          value: 'https://www.youtube.com/watch?v=0Xv3eTfjMT4'
-        }
-      ],
+      videos: [],
 
-      songs: [
-        {
-          value: 'https://bandcamp.com/EmbeddedPlayer/album=2428500762/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/'
-        }
-      ],
+      songs: [],
+
+      link: {facebook:'',email:''},
 
       shows: [
         {
@@ -92,8 +82,8 @@ class App extends Component {
       },
 
       addNewSong: song => {
-        const { date, venue, city } = song;
-        const newSong = { id:uuidv4(), date, venue, city }
+        const { value } = song;
+        const newSong = { value }
         this.setState({ songs:[...this.state.songs, newSong ]})
       },
 
@@ -104,9 +94,13 @@ class App extends Component {
       },
 
       addNewLink: link => { 
-        const { date, venue, city } = link;
-        const newLink = { id:uuidv4(), date, venue, city }
-        this.setState({ links:[...this.state.links, newLink ]})
+        this.setState({ link })
+      },
+
+      updateLink: (link,url) => {
+        const links = this.state.link;
+        links[link] = url;
+        this.setState({link:links})
       },
 
       addNewSubscriber: email => {
