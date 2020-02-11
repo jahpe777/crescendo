@@ -137,7 +137,15 @@ class ProfilePage extends Component {
                 </p>
 
                 <div className = { `show-audio-help-${ this.state.audioHelp }` }>
-                    <p>Here is some helpful information</p>
+                    <ul className='audio-help'>
+                        <li className='audio-help-li'>Go to your Bandcamp account</li>
+                        <li className='audio-help-li'>Click on track or album that you want to link</li>
+                        <li className='audio-help-li'>Click on the "Share/Embed" link</li>
+                        <li className='audio-help-li'>Click on "Embed this track"</li>
+                        <li className='audio-help-li'>Within the "Select a style" prompt, click on the largest style option</li>
+                        <li className='audio-help-li'>Copy the "src" portion of the embed link - src="https://bandcamp.com/EmbeddedPlayer/track=77723839/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"</li>
+                        <li className='audio-help-li'>Paste this portion of the link within the form above and click "Submit"</li>
+                    </ul>
                 </div>
 
                 <p><button className='bandAudio-button' type='submit'>Submit</button></p>

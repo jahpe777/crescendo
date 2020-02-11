@@ -15,10 +15,6 @@ h3 {
     font-weight: normal;
 }
 
-a {
-    width: 50px;
-}
-
 form {
     margin: 30px;
 }
@@ -42,8 +38,10 @@ input::-webkit-input-placeholder {
     margin: 10px auto 20px;
 }
 
-.bandHome-button {
-    margin-top: 50px;
+button.bandHome-button {
+    margin: 0px;
+    width: 300px;
+    height: 100px;
 }
 
 .show-audio-help-false {
@@ -52,4 +50,12 @@ input::-webkit-input-placeholder {
 
 .show-audio-help-true {
     display: block;
+}
+
+.audio-help {
+    list-style-type: none;
+}
+
+.audio-help-li {
+    margin: 20px;
 }

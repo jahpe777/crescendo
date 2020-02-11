@@ -4,6 +4,10 @@ h1 {
     font-weight: normal;
 }
 
+nav {
+    display: flex;
+}
+
 section.navbar {
     display: flex;
     padding: 10px;
@@ -57,3 +61,4 @@ a.login-link {
     background-color: blue;
     opacity: 25%;
   } */
+

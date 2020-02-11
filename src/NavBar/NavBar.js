@@ -25,7 +25,6 @@ class NavBar extends React.Component {
                             : ''
                         }
                             { this.context.authToken ? 
-                            <ul className='navlinks'>
                                 <a 
                                     className='login-link' 
                                     href='/logout' 
@@ -35,14 +34,12 @@ class NavBar extends React.Component {
                                         <li className='nav-li'>Sign Out</li>
                                     </button>
                                 </a> 
-                            </ul>   : 
-                            <ul className='navlinks'>
+                               : 
                                     <Link className='login-link' to='/login'>
                                         <button className='nav-button' type='submit'>
                                             <li className='nav-li'>Sign In</li>
                                         </button>
                                     </Link>
-                            </ul>
                             }
                     </nav>
             </section>
