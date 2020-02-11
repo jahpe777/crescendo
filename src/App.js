@@ -33,7 +33,7 @@ class App extends Component {
 
       songs: [],
 
-      link: {facebook:'',email:''},
+      link: { facebook:'', twitter:'', instagram:'', youtube:'', soundcloud:'', bandcamp:'', email:'' },
 
       shows: [
         {
@@ -51,6 +51,16 @@ class App extends Component {
           emailDate: "2019-12-18T00:00:00.000Z",
         }
       ],
+
+      signUp: (e, cb) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        
+            window.localStorage.setItem('authToken', true);
+            this.setState({ authToken: true });
+            cb();
+      },
 
       login: (e, cb) => {
         e.preventDefault();

@@ -10,14 +10,14 @@ class Footer extends Component {
         return (
             
             <section className='footer'>
-            <ul className='links'>
-                {this.context.authToken ? Object.keys(this.context.link).map(key=>(
-                        this.context.link[key]!='' ? <li>
-                            <a target='_blank' rel='noopener noreferrer' href= { this.context.link[key] }>
-                                <img className='icons' alt={key} src={`images/${key}.png`} />
-                            </a>
-                        </li> : ''
-                )) : ('')}
+                <ul className='links'>
+                    {this.context.authToken ? Object.keys(this.context.link).map(key=>(
+                            this.context.link[key]!='' ? <li>
+                                <a target='_blank' rel='noopener noreferrer' href= { this.context.link[key] }>
+                                    <img className='icons' alt={key} src={`images/${key}.png`} />
+                                </a>
+                            </li> : ''
+                    )) : ('')}
                 </ul>
             </section>
         );

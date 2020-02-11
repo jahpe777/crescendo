@@ -5,7 +5,7 @@ import './NavBar.css';
 import Context from '../Contexts/Context';
 
 class NavBar extends React.Component {
-    
+
     static contextType = Context;
 
     render(){
@@ -13,6 +13,7 @@ class NavBar extends React.Component {
             <section className='navbar'>
                 <h1 className='crescendo-home'><Link to='/'>Crescendo</Link></h1>
                     <nav>
+                        { this.context.authToken ?
                         <ul className='navlinks'>
                             <li className='nav-li'><Link to='/home'>Home</Link></li>
                             <li className='nav-li'><Link to='/profile'>Profile</Link></li>
@@ -20,23 +21,29 @@ class NavBar extends React.Component {
                             <li className='nav-li'><Link to='/listen'>Listen</Link></li>
                             <li className='nav-li'><Link to='/shows'>Shows</Link></li>
                             <li className='nav-li'><Link to='/signup'>Mailing List</Link></li>
+                        </ul>
+                            : ''
+                        }
                             { this.context.authToken ? 
+                            <ul className='navlinks'>
                                 <a 
                                     className='login-link' 
                                     href='/logout' 
-                                    onClick={e => this.context.logout(e, () => this.props.history.push('/profile'))}
+                                    onClick={e => this.context.logout(e, () => this.props.history.push('/'))}
                                 >
                                     <button className='nav-button' type='submit'>
                                         <li className='nav-li'>Sign Out</li>
                                     </button>
-                                </a> : 
+                                </a> 
+                            </ul>   : 
+                            <ul className='navlinks'>
                                     <Link className='login-link' to='/login'>
                                         <button className='nav-button' type='submit'>
                                             <li className='nav-li'>Sign In</li>
                                         </button>
                                     </Link>
+                            </ul>
                             }
-                        </ul>
                     </nav>
             </section>
         );

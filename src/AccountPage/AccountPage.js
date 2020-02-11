@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import './AccountPage.css';
+import Context from '../Contexts/Context';
 
 class AccountPage extends Component {
+
+  static contextType = Context;
+
   render() {
     return (
       <div className='accountPage'>
@@ -17,12 +21,12 @@ class AccountPage extends Component {
             <form 
                 className='account-form' 
                 ref={ form => this.form = form } 
-                onSubmit={ this.handleSubmit }
+                onSubmit={ e => this.context.signUp(e, () => this.props.history.push('/profile')) }
             >
                 <p><label htmlFor='account'>Email: </label>
-                    <input placeholder='john@gmail.com' type='email' required name='account' id='account' /></p>
+                    <input placeholder='john@gmail.com' type='email' required name='email' id='email' /></p>
                 <p><label htmlFor='account'>Password: </label>
-                    <input placeholder='john@gmail.com' type='password' required name='account' id='account' /></p>
+                    <input placeholder='password' type='password' required name='password' id='password' /></p>
 
                 <p><button className='account-button' type='submit'>Submit</button></p>
             </form>

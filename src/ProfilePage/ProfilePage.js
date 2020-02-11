@@ -13,6 +13,10 @@ class ProfilePage extends Component {
         if(!window.localStorage.getItem('authToken')) {
             this.props.history.push('/');
         }
+
+        this.state = {
+            audioHelp: false
+        }
     }
 
     imagesHandleSubmit = e => {
@@ -93,7 +97,7 @@ class ProfilePage extends Component {
         
             <h3>Submit an image of your music project</h3>
             <form 
-                className='band-image-form' 
+                className='band-form' 
                 ref={ form => this.form = form } 
                 onSubmit={ e => this.imagesHandleSubmit(e) }
             >
@@ -105,7 +109,7 @@ class ProfilePage extends Component {
 
             <h3>Submit YouTube links for your music project</h3>
             <form 
-                className='band-video-form' 
+                className='band-form' 
                 ref={ form => this.form = form } 
                 onSubmit = { e => this.videosHandleSubmit(e) }
             >
@@ -117,19 +121,31 @@ class ProfilePage extends Component {
 
             <h3>Submit Bandcamp embedded links for your music project</h3>
             <form 
-                className='band-audio-form' 
+                className='band-form' 
                 ref={ form => this.form = form } 
                 onSubmit={ e => this.songsHandleSubmit(e) }
             >
                 <p><label htmlFor='bandAudio'>Audio: </label>
                     <input placeholder='https://bandcamp.com/EmbeddedPlayer/track=77723839/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/' type='text' required name='bandAudio' id='bandAudio' /></p>
 
+                <p>
+                    <a href="/audiohelp" onClick = { e => { 
+                    e.preventDefault();
+                    this.setState({ audioHelp: !this.state.audioHelp })
+                    }}>
+                    {this.state.audioHelp ? 'Hide Help' : 'Show Help'}</a>
+                </p>
+
+                <div className = { `show-audio-help-${ this.state.audioHelp }` }>
+                    <p>Here is some helpful information</p>
+                </div>
+
                 <p><button className='bandAudio-button' type='submit'>Submit</button></p>
             </form>
 
             <h3>Submit your music project's upcoming shows</h3>
             <form 
-                className='band-show-form'
+                className='band-form'
                 ref={ form => this.form = form } 
                 onSubmit = { e => this.showsHandleSubmit(e) }
             >
@@ -141,7 +157,7 @@ class ProfilePage extends Component {
 
             <h3>Submit social media links for your music project</h3>
             <form 
-                className='band-social-form' 
+                className='band-form' 
                 ref={ form => this.form = form } 
             >
                 <p><label htmlFor='bandSocial-Facebook'>Facebook: </label>
@@ -171,7 +187,7 @@ class ProfilePage extends Component {
                 <section>
                     <h3>Click below to go to your home page</h3>
                     <Link to='/home' type='submit'>
-                        <p><button className='bandHome-button' type='submit'>View your website!</button></p>
+                        <button className='bandHome-button' type='submit'>View your website!</button>
                     </Link>
                 </section>
             </div>

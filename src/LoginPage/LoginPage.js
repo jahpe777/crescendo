@@ -26,7 +26,7 @@ class LoginPage extends Component {
                 <p><label htmlFor='account'>Email: </label>
                     <input placeholder='john@gmail.com' type='email' required name='email' id='email' /></p>
                 <p><label htmlFor='account'>Password: </label>
-                    <input placeholder='john@gmail.com' type='password' required name='password' id='password' /></p>
+                    <input placeholder='password' type='password' required name='password' id='password' /></p>
 
                 <p><button className='account-button' type='submit'>Submit</button></p>
             </form>

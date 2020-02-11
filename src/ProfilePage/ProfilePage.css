@@ -15,6 +15,10 @@ h3 {
     font-weight: normal;
 }
 
+a {
+    width: 50px;
+}
+
 form {
     margin: 30px;
 }
@@ -30,10 +34,22 @@ input::-webkit-input-placeholder {
     font-size: 20px;
 }
 
-.band-social-form input {
+.band-form input {
     display: block;
-    width: 90%;
+    width: 70%;
     margin: 0 auto;
     text-align: center;
     margin: 10px auto 20px;
+}
+
+.bandHome-button {
+    margin-top: 50px;
+}
+
+.show-audio-help-false {
+    display: none;
+}
+
+.show-audio-help-true {
+    display: block;
 }
