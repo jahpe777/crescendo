@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default React.createContext(); //({
-    // shows: [],
-    // addNewSubscriber: ()=>{}
-// });
+export default React.createContext({
+  shows: [],
+  addNewSubscriber: () => {}
+});

@@ -43,7 +43,7 @@ class App extends Component {
 
       shows: [],
 
-      subscribers: [],
+      emails: [],
 
       addNewShow: show => {
         fetch(`${config.API_ENDPOINT}/api/shows`, {
@@ -120,11 +120,11 @@ class App extends Component {
         this.setState({ songs: [...this.state.songs, newSong] });
       },
 
-      addNewShow: show => {
-        const { date, venue, city } = show;
-        const newShow = { id: uuidv4(), date, venue, city };
-        this.setState({ shows: [...this.state.shows, newShow] });
-      },
+      // addNewShow: show => {
+      //   const { date, venue, city } = show;
+      //   const newShow = { id: uuidv4(), date, venue, city };
+      //   this.setState({ shows: [...this.state.shows, newShow] });
+      // },
 
       addNewLink: link => {
         this.setState({ link });
@@ -134,14 +134,14 @@ class App extends Component {
         const links = this.state.link;
         links[link] = url;
         this.setState({ link: links });
-      },
-
-      addNewSubscriber: email => {
-        const newSubscriber = { id: uuidv4(), email, emailDate: new Date() };
-        this.setState({
-          subscribers: [...this.state.subscribers, newSubscriber]
-        });
       }
+
+      //   addNewSubscriber: email => {
+      //     const newSubscriber = { id: uuidv4(), email, emailDate: new Date() };
+      //     this.setState({
+      //       subscribers: [...this.state.subscribers, newSubscriber]
+      //     });
+      //   }
     };
   }
 
