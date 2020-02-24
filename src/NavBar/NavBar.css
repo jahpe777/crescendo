@@ -1,64 +1,66 @@
 h1 {
-    font-size: 40px;
-    margin: 3px 0px;
-    font-weight: normal;
+  font-size: 40px;
+  margin: 3px 0px;
+  font-weight: normal;
 }
 
 nav {
-    display: flex;
+  display: flex;
 }
 
 section.navbar {
-    display: flex;
-    padding: 10px;
-    /* justify-content: space-between; */
-}
-
-@media screen and (max-width: 767px){
-    section.navbar {
-        flex-direction: column;
-    }
+  display: flex;
+  padding: 10px;
 }
 
 nav {
-    flex: 1;
+  flex: 1;
 }
 
 .navlinks {
-    list-style: none;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    font-size: 20px;
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  font-size: 20px;
 }
 
 .nav-li {
-    display: inline;
-    padding: 20px;
+  display: inline;
+  padding: 20px;
 }
 
 a.login-link {
-    flex: 1;
-    text-align: right;
+  flex: 1;
+  text-align: right;
 }
 
 .nav-button {
-    display: inline;
-    border-radius: 25px;
-    margin: 10px;
-    width: 150px;
-    height: 40px;
-    cursor: pointer;
+  display: inline;
+  border-radius: 25px;
+  margin: 10px;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
 }
 
 .account-link {
-    display: inline;
-    border-radius: 25px;
-    margin: 0px;
+  display: inline;
+  border-radius: 25px;
+  margin: 0px;
 }
 
-/* button:hover {
-    background-color: blue;
-    opacity: 25%;
-  } */
+@media screen and (max-width: 415px) {
+  section.navbar {
+    flex-direction: column;
+  }
+  .nav-li {
+    padding: 10px;
+  }
+}
 
+@media screen and (min-width: 415px) and (max-width: 1050px) {
+  .nav-li {
+    padding: 15px;
+  }
+}

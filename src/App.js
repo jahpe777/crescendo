@@ -45,7 +45,58 @@ class App extends Component {
 
       emails: [],
 
+      addNewUser: user => {
+        fetch(`${config.API_ENDPOINT}/api/users`, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST',
+          body: JSON.stringify({ user })
+        })
+          .then(res => res.json())
+          .then(res => {
+            console.log(res);
+            this.setState({ users: [...this.state.users, res] });
+          })
+          .catch(err => console.log(err));
+      },
+
+      addNewVideo: video => {
+        // video.user_id = 1;
+        fetch(`${config.API_ENDPOINT}/api/videos`, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST',
+          body: JSON.stringify({ video })
+        })
+          .then(res => res.json())
+          .then(res => {
+            console.log(res);
+            this.setState({ videos: [...this.state.videos, res] });
+          })
+          .catch(err => console.log(err));
+      },
+
+      addNewSong: song => {
+        // song.user_id = 1;
+        fetch(`${config.API_ENDPOINT}/api/songs`, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST',
+          body: JSON.stringify({ song })
+        })
+          .then(res => res.json())
+          .then(res => {
+            console.log(res);
+            this.setState({ songs: [...this.state.songs, res] });
+          })
+          .catch(err => console.log(err));
+      },
+
       addNewShow: show => {
+        // show.user_id = 1;
         fetch(`${config.API_ENDPOINT}/api/shows`, {
           headers: {
             'Content-Type': 'application/json'
@@ -62,6 +113,7 @@ class App extends Component {
       },
 
       addNewEmail: email => {
+        email.user_id = 1;
         fetch(`${config.API_ENDPOINT}/api/emails`, {
           headers: {
             'Content-Type': 'application/json'
@@ -108,17 +160,17 @@ class App extends Component {
         this.setState({ images: [...this.state.images, newImage] });
       },
 
-      addNewVideo: video => {
-        const { value } = video;
-        const newVideo = { value };
-        this.setState({ videos: [...this.state.videos, newVideo] });
-      },
+      // addNewVideo: video => {
+      //   const { value } = video;
+      //   const newVideo = { value };
+      //   this.setState({ videos: [...this.state.videos, newVideo] });
+      // },
 
-      addNewSong: song => {
-        const { value } = song;
-        const newSong = { value };
-        this.setState({ songs: [...this.state.songs, newSong] });
-      },
+      // addNewSong: song => {
+      //   const { value } = song;
+      //   const newSong = { value };
+      //   this.setState({ songs: [...this.state.songs, newSong] });
+      // },
 
       // addNewShow: show => {
       //   const { date, venue, city } = show;
