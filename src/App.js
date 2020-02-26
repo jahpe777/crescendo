@@ -15,6 +15,7 @@ import WatchPage from './WatchPage/WatchPage';
 import ListenPage from './ListenPage/ListenPage';
 import ShowsPage from './ShowsPage/ShowsPage';
 import SignUpPage from './SignUpPage/SignUpPage';
+import SideDrawer from './SideDrawer/SideDrawer';
 
 import Context from './Contexts/Context';
 import config from './config';
@@ -24,6 +25,8 @@ class App extends Component {
     super();
     this.state = {
       authToken: false,
+
+      users: [],
 
       images: [],
 
@@ -45,6 +48,17 @@ class App extends Component {
 
       emails: [],
 
+      sideDrawerOpen: false,
+
+      links: {
+        home: 'Home',
+        profile: 'Profile',
+        watch: 'Watch',
+        listen: 'Listen',
+        shows: 'Shows',
+        signup: 'Mailing List'
+      },
+
       addNewUser: user => {
         fetch(`${config.API_ENDPOINT}/api/users`, {
           headers: {
@@ -61,14 +75,14 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
-      addNewVideo: video => {
+      addNewVideo: ({ video, user_id = '1' }) => {
         // video.user_id = 1;
         fetch(`${config.API_ENDPOINT}/api/videos`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({ video })
+          body: JSON.stringify({ video, user_id })
         })
           .then(res => res.json())
           .then(res => {
@@ -78,14 +92,14 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
-      addNewSong: song => {
+      addNewSong: ({ song, user_id = '1' }) => {
         // song.user_id = 1;
         fetch(`${config.API_ENDPOINT}/api/songs`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({ song })
+          body: JSON.stringify({ song, user_id })
         })
           .then(res => res.json())
           .then(res => {
@@ -95,34 +109,33 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
-      addNewShow: show => {
-        // show.user_id = 1;
+      addNewShow: (show, user_id = '1') => {
         fetch(`${config.API_ENDPOINT}/api/shows`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({ show })
+          body: JSON.stringify({ show, user_id })
         })
           .then(res => res.json())
           .then(res => {
-            console.log(res);
             this.setState({ shows: [...this.state.shows, res] });
+            console.log('yayayay', show, user_id);
           })
           .catch(err => console.log(err));
       },
 
-      addNewEmail: email => {
-        email.user_id = 1;
+      addNewEmail: (email, user_id = '1') => {
         fetch(`${config.API_ENDPOINT}/api/emails`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({ email })
+          body: JSON.stringify({ email, user_id })
         })
           .then(res => {
             this.setState({ emails: [...this.state.emails, res] });
+            console.log('bababab', email, user_id);
           })
           .catch(err => console.log(err));
       },
@@ -160,24 +173,6 @@ class App extends Component {
         this.setState({ images: [...this.state.images, newImage] });
       },
 
-      // addNewVideo: video => {
-      //   const { value } = video;
-      //   const newVideo = { value };
-      //   this.setState({ videos: [...this.state.videos, newVideo] });
-      // },
-
-      // addNewSong: song => {
-      //   const { value } = song;
-      //   const newSong = { value };
-      //   this.setState({ songs: [...this.state.songs, newSong] });
-      // },
-
-      // addNewShow: show => {
-      //   const { date, venue, city } = show;
-      //   const newShow = { id: uuidv4(), date, venue, city };
-      //   this.setState({ shows: [...this.state.shows, newShow] });
-      // },
-
       addNewLink: link => {
         this.setState({ link });
       },
@@ -186,14 +181,11 @@ class App extends Component {
         const links = this.state.link;
         links[link] = url;
         this.setState({ link: links });
-      }
+      },
 
-      //   addNewSubscriber: email => {
-      //     const newSubscriber = { id: uuidv4(), email, emailDate: new Date() };
-      //     this.setState({
-      //       subscribers: [...this.state.subscribers, newSubscriber]
-      //     });
-      //   }
+      drawerClickHandler: () => {
+        this.setState({ sideDrawerOpen: !this.state.sideDrawerOpen });
+      }
     };
   }
 
@@ -201,14 +193,35 @@ class App extends Component {
     this.setState({
       authToken: window.localStorage.getItem('authToken')
     });
+    // need to fetch the BE to get all shows from the database
+    fetch(`${config.API_ENDPOINT}/api/shows`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(error => Promise.reject(error));
+        }
+        return res.json();
+      })
+      .then(shows => {
+        // still do this step
+        this.setState({ shows });
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
   }
 
   render() {
     return (
       <Context.Provider value={this.state}>
-        <div className="App">
+        <div className="App" style={{ height: '100%' }}>
           <header className="App-Header">
             <Route path="/" component={NavBar} />
+            {this.state.sideDrawerOpen ? <SideDrawer /> : ''}
           </header>
           <main className="Header">
             <Route exact path="/" component={LandingPage} />

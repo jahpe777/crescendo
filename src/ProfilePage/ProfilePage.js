@@ -59,12 +59,13 @@ class ProfilePage extends Component {
 
   showsHandleSubmit = e => {
     e.preventDefault();
-    const show = {
+    const newShow = {
       date: e.target.date.value,
       venue: e.target.venue.value,
       city: e.target.city.value
     };
-    this.context.addNewShow(show);
+    this.context.addNewShow(newShow);
+    console.log('zazazaz', newShow);
     e.target.reset();
   };
 

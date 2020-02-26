@@ -50,6 +50,11 @@ a.login-link {
   margin: 0px;
 }
 
+.drawer-toggle-div {
+  height: 40px;
+  width: 40px;
+}
+
 @media screen and (max-width: 415px) {
   section.navbar {
     flex-direction: column;
