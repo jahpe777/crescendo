@@ -75,8 +75,7 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
-      addNewVideo: ({ video, user_id = '1' }) => {
-        // video.user_id = 1;
+      addNewVideo: (video, user_id = '1') => {
         fetch(`${config.API_ENDPOINT}/api/videos`, {
           headers: {
             'Content-Type': 'application/json'
@@ -92,24 +91,27 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
-      addNewSong: ({ song, user_id = '1' }) => {
-        // song.user_id = 1;
+      addNewSong: (song, user_id = '1') => {
         fetch(`${config.API_ENDPOINT}/api/songs`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({ song, user_id })
+          body: JSON.stringify({
+            song,
+            user_id
+          })
         })
           .then(res => res.json())
           .then(res => {
-            console.log(res);
             this.setState({ songs: [...this.state.songs, res] });
+            console.log('yayayay', song, res);
           })
           .catch(err => console.log(err));
       },
 
       addNewShow: (show, user_id = '1') => {
+        show.user_id = user_id;
         fetch(`${config.API_ENDPOINT}/api/shows`, {
           headers: {
             'Content-Type': 'application/json'
@@ -120,7 +122,6 @@ class App extends Component {
           .then(res => res.json())
           .then(res => {
             this.setState({ shows: [...this.state.shows, res] });
-            console.log('yayayay', show, user_id);
           })
           .catch(err => console.log(err));
       },
@@ -135,7 +136,6 @@ class App extends Component {
         })
           .then(res => {
             this.setState({ emails: [...this.state.emails, res] });
-            console.log('bababab', email, user_id);
           })
           .catch(err => console.log(err));
       },

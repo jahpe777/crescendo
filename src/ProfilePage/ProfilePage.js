@@ -16,15 +16,19 @@ class ProfilePage extends Component {
     this.state = {
       audioHelp: false
     };
+
+    this.state = {
+      videoHelp: false
+    };
   }
 
   imagesHandleSubmit = e => {
     e.preventDefault();
-    const image = {
+    const newImage = {
       value: e.target.bandImage.value
     };
-    if (image.value.includes('jpg' || 'png')) {
-      this.context.addNewImage(image);
+    if (newImage.value.includes('jpg' || 'png')) {
+      this.context.addNewImage(newImage);
       e.target.reset();
     } else {
       alert('Only valid image links (jpg, png) are allowed');
@@ -33,11 +37,9 @@ class ProfilePage extends Component {
 
   videosHandleSubmit = e => {
     e.preventDefault();
-    const video = {
-      value: e.target.bandVideo.value
-    };
-    if (video.value.includes('youtube')) {
-      this.context.addNewVideo(video);
+    const newVideo = e.target.bandVideo.value;
+    if (newVideo.includes('youtube')) {
+      this.context.addNewVideo(newVideo);
       e.target.reset();
     } else {
       alert('Only YouTube URL links are valid');
@@ -46,11 +48,9 @@ class ProfilePage extends Component {
 
   songsHandleSubmit = e => {
     e.preventDefault();
-    const song = {
-      value: e.target.bandAudio.value
-    };
-    if (song.value.includes('bandcamp')) {
-      this.context.addNewSong(song);
+    const newSong = e.target.bandAudio.value;
+    if (newSong.includes('bandcamp')) {
+      this.context.addNewSong(newSong);
       e.target.reset();
     } else {
       alert('Only Bandcamp URL links are valid');
@@ -65,13 +65,12 @@ class ProfilePage extends Component {
       city: e.target.city.value
     };
     this.context.addNewShow(newShow);
-    console.log('zazazaz', newShow);
     e.target.reset();
   };
 
   linksHandleSubmit = e => {
     e.preventDefault();
-    const link = {
+    const newLink = {
       facebook: e.target.facebook.value,
       twitter: e.target.twitter.value,
       instagram: e.target.instagram.value,
@@ -81,7 +80,7 @@ class ProfilePage extends Component {
       email: e.target.email.value !== '' ? 'mailto:' + e.target.email.value : ''
     };
 
-    this.context.addNewLink(link);
+    this.context.addNewLink(newLink);
     e.target.reset();
   };
 
@@ -111,7 +110,7 @@ class ProfilePage extends Component {
             </p>
 
             <p>
-              <button className="bandImage-button" type="submit">
+              <button className="submit-button" type="submit">
                 Submit
               </button>
             </p>
@@ -126,7 +125,7 @@ class ProfilePage extends Component {
             <p>
               <label htmlFor="bandVideo">Videos: </label>
               <input
-                placeholder="https://www.youtube.com/watch?v=0Xv3eTfjMT4"
+                placeholder="https://www.youtube.com/embed/IFEmb8PNuGI"
                 type="text"
                 required
                 name="bandVideo"
@@ -135,7 +134,37 @@ class ProfilePage extends Component {
             </p>
 
             <p>
-              <button className="bandVideo-button" type="submit">
+              <a
+                href="/videohelp"
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ videoHelp: !this.state.videoHelp });
+                }}
+              >
+                {this.state.videoHelp ? 'Hide Help' : 'Show Help'}
+              </a>
+            </p>
+
+            <div className={`show-video-help-${this.state.videoHelp}`}>
+              <ul className="video-help">
+                <li className="video-help-li">
+                  Go to your YouTube video you want to link
+                </li>
+                <li className="audio-help-li">Click on the "Share" link</li>
+                <li className="audio-help-li">Click on "Embed"</li>
+                <li className="audio-help-li">
+                  Copy the "src" portion of the embed link -
+                  src="https://bandcamp.com/EmbeddedPlayer/track=77723839/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
+                </li>
+                <li className="audio-help-li">
+                  Paste this portion of the link (delete "src" and the quotes)
+                  within the form above and click "Submit"
+                </li>
+              </ul>
+            </div>
+
+            <p>
+              <button className="submit-button" type="submit">
                 Submit
               </button>
             </p>
@@ -148,7 +177,7 @@ class ProfilePage extends Component {
             onSubmit={e => this.songsHandleSubmit(e)}
           >
             <p>
-              <label htmlFor="bandAudio">Audio: </label>
+              <label htmlFor="bandAudio">Songs: </label>
               <input
                 placeholder="https://bandcamp.com/EmbeddedPlayer/track=77723839/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
                 type="text"
@@ -189,14 +218,14 @@ class ProfilePage extends Component {
                   src="https://bandcamp.com/EmbeddedPlayer/track=77723839/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
                 </li>
                 <li className="audio-help-li">
-                  Paste this portion of the link within the form above and click
-                  "Submit"
+                  Paste this portion of the link (delete "src" and the quotes)
+                  within the form above and click "Submit"
                 </li>
               </ul>
             </div>
 
             <p>
-              <button className="bandAudio-button" type="submit">
+              <button className="submit-button" type="submit">
                 Submit
               </button>
             </p>
@@ -230,7 +259,7 @@ class ProfilePage extends Component {
               aria-label="venue city"
             />
             <p>
-              <button className="showsAdmin-button" type="submit">
+              <button className="submit-button" type="submit">
                 Submit
               </button>
             </p>

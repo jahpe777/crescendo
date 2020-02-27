@@ -5,11 +5,10 @@ import Context from '../Contexts/Context';
 class SignUpPage extends Component {
   static contextType = Context;
 
-  emailsHandleSubmit = event => {
-    event.preventDefault();
-    const email = event.target.email.value;
-    // fetch post
-    this.context.addNewEmail(email);
+  emailsHandleSubmit = e => {
+    e.preventDefault();
+    const newEmail = e.target.email.value;
+    this.context.addNewEmail(newEmail);
     this.form.reset();
     alert('Thanks for signing up!');
   };

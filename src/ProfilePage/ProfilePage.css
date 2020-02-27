@@ -1,61 +1,82 @@
 .profile {
-    font-size: 60px;
-    margin-bottom: 100px;
+  font-size: 60px;
+  margin-bottom: 100px;
 }
 
 h2 {
-    font-size: 40px;
-    margin: 20px;
-    font-weight: normal;
+  font-size: 40px;
+  margin: 20px;
+  font-weight: normal;
 }
 
 h3 {
-    font-size: 30px;
-    margin: 20px;
-    font-weight: normal;
+  font-size: 30px;
+  margin: 20px;
+  font-weight: normal;
 }
 
 form {
-    margin: 30px;
+  margin: 30px;
 }
 
 input {
-    height: 30px;
-    width: 210px;
-    font-size: 20px;
-    color: skyblue;
+  height: 30px;
+  width: 210px;
+  font-size: 20px;
+  color: skyblue;
 }
 
 input::-webkit-input-placeholder {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .band-form input {
-    display: block;
-    width: 70%;
-    margin: 0 auto;
-    text-align: center;
-    margin: 10px auto 20px;
+  display: block;
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+  margin: 10px auto 20px;
 }
 
 button.bandHome-button {
-    margin: 0px;
-    width: 300px;
-    height: 100px;
+  margin: 0px;
+  width: 300px;
+  height: 100px;
+}
+
+button.submit-button {
+  margin-top: 5px;
+  cursor: pointer;
 }
 
 .show-audio-help-false {
-    display: none;
+  display: none;
 }
 
 .show-audio-help-true {
-    display: block;
+  display: block;
 }
 
 .audio-help {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .audio-help-li {
-    margin: 20px;
+  margin: 20px;
+}
+
+.show-video-help-false {
+  display: none;
+}
+
+.show-video-help-true {
+  display: block;
+}
+
+.video-help {
+  list-style-type: none;
+}
+
+.video-help-li {
+  margin: 20px;
 }
