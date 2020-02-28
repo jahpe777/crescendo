@@ -22,21 +22,6 @@ class ListenPage extends Component {
                   ></iframe>
                 </div>
               ))}
-              {/* {this.context.songs.map((song, i) =>
-                song.value ? (
-                  <div key={i}>
-                    <iframe
-                      title="bandcamp alum"
-                      border="0"
-                      width="350px"
-                      height="470px"
-                      src={song}
-                    ></iframe>
-                  </div>
-                ) : (
-                  ''
-                )
-              )} */}
             </section>
           </div>
         )}

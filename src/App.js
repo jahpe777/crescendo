@@ -194,26 +194,68 @@ class App extends Component {
       authToken: window.localStorage.getItem('authToken')
     });
     // need to fetch the BE to get all shows from the database
-    fetch(`${config.API_ENDPOINT}/api/shows`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-      .then(res => {
-        if (!res.ok) {
-          return res.json().then(error => Promise.reject(error));
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/api/shows`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
         }
-        return res.json();
+      }),
+      fetch(`${config.API_ENDPOINT}/api/songs`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
+      }),
+      fetch(`${config.API_ENDPOINT}/api/videos`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
       })
-      .then(shows => {
-        // still do this step
-        this.setState({ shows });
+    ])
+      .then(([res1, res2, res3]) => {
+        if (!res1.ok || !res2.ok || !res3.ok) {
+          return (res1.json(), res2.json(), res3.json()).then(error =>
+            Promise.reject(error)
+          );
+        }
+        return { shows: res1.json(), songs: res2.json(), videos: res3.json() };
+      })
+      .then(res => {
+        const { shows, songs, videos } = res;
+        this.setState({ shows, songs, videos });
       })
       .catch(error => {
         this.setState({ error });
       });
   }
+
+  // componentDidMount() {
+  //   this.setState({
+  //     authToken: window.localStorage.getItem('authToken')
+  //   });
+  //   // need to fetch the BE to get all shows from the database
+  //   fetch(`${config.API_ENDPOINT}/api/songs`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'content-type': 'application/json'
+  //     }
+  //   })
+  //     .then(res => {
+  //       if (!res.ok) {
+  //         return res.json().then(error => Promise.reject(error));
+  //       }
+  //       return res.json();
+  //     })
+  //     .then(songs => {
+  //       // still do this step
+  //       this.setState({ songs });
+  //     })
+  //     .catch(error => {
+  //       this.setState({ error });
+  //     });
+  // }
 
   render() {
     return (

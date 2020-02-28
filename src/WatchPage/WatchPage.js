@@ -25,24 +25,6 @@ class WatchPage extends Component {
                   ></iframe>
                 </div>
               ))}
-              {/* {this.context.videos.map((video, i) =>
-                video.value ? (
-                  <div key={i}>
-                    <iframe
-                    className="videos"
-                    title="newVideo"
-                    width="46.3%"
-                    height="473"
-                    src={video}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                  </div>
-                ) : (
-                  ''
-                )
-              )} */}
             </section>
           </div>
         )}

@@ -68,6 +68,14 @@ class ProfilePage extends Component {
     e.target.reset();
   };
 
+  showsHandleDelete = e => {
+    e.preventDefault();
+    const noteId = this.props.id;
+    this.context.deleteNote(noteId).then(deletedNote => {
+      this.props.onDeleteNote(deletedNote);
+    });
+  };
+
   linksHandleSubmit = e => {
     e.preventDefault();
     const newLink = {
