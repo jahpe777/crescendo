@@ -14,10 +14,7 @@ class ProfilePage extends Component {
     }
 
     this.state = {
-      audioHelp: false
-    };
-
-    this.state = {
+      audioHelp: false,
       videoHelp: false
     };
   }
@@ -28,7 +25,7 @@ class ProfilePage extends Component {
       value: e.target.bandImage.value
     };
     if (newImage.value.includes('jpg' || 'png')) {
-      this.context.addNewImage(newImage);
+      this.context.updateUser(newImage);
       e.target.reset();
     } else {
       alert('Only valid image links (jpg, png) are allowed');
@@ -46,6 +43,11 @@ class ProfilePage extends Component {
     }
   };
 
+  videosClickDelete = (e, videoId) => {
+    e.preventDefault();
+    this.context.handleDeleteVideo(videoId);
+  };
+
   songsHandleSubmit = e => {
     e.preventDefault();
     const newSong = e.target.bandAudio.value;
@@ -55,6 +57,11 @@ class ProfilePage extends Component {
     } else {
       alert('Only Bandcamp URL links are valid');
     }
+  };
+
+  songsClickDelete = (e, songId) => {
+    e.preventDefault();
+    this.context.handleDeleteSong(songId);
   };
 
   showsHandleSubmit = e => {
@@ -68,12 +75,9 @@ class ProfilePage extends Component {
     e.target.reset();
   };
 
-  showsHandleDelete = e => {
+  showsClickDelete = (e, showId) => {
     e.preventDefault();
-    const noteId = this.props.id;
-    this.context.deleteNote(noteId).then(deletedNote => {
-      this.props.onDeleteNote(deletedNote);
-    });
+    this.context.handleDeleteShow(showId);
   };
 
   linksHandleSubmit = e => {
@@ -87,8 +91,7 @@ class ProfilePage extends Component {
       bandcamp: e.target.bandcamp.value,
       email: e.target.email.value !== '' ? 'mailto:' + e.target.email.value : ''
     };
-
-    this.context.addNewLink(newLink);
+    this.context.updateUser(newLink);
     e.target.reset();
   };
 
@@ -98,7 +101,6 @@ class ProfilePage extends Component {
       <div className="profilePage">
         <section className="image-profilePage">
           <h1 className="profile">Profile</h1>
-          <h2>Spanish Prisoners</h2>
 
           <h3>Submit an image of your music project</h3>
           <form
@@ -124,7 +126,7 @@ class ProfilePage extends Component {
             </p>
           </form>
 
-          <h3>Submit YouTube links for your music project</h3>
+          <h3>Submit YouTube embedded links for your music project</h3>
           <form
             className="band-form"
             ref={form => (this.form = form)}
@@ -158,13 +160,13 @@ class ProfilePage extends Component {
                 <li className="video-help-li">
                   Go to your YouTube video you want to link
                 </li>
-                <li className="audio-help-li">Click on the "Share" link</li>
-                <li className="audio-help-li">Click on "Embed"</li>
-                <li className="audio-help-li">
+                <li className="video-help-li">Click on the "Share" link</li>
+                <li className="video-help-li">Click on "Embed"</li>
+                <li className="video-help-li">
                   Copy the "src" portion of the embed link -
                   src="https://bandcamp.com/EmbeddedPlayer/track=77723839/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
                 </li>
-                <li className="audio-help-li">
+                <li className="video-help-li">
                   Paste this portion of the link (delete "src" and the quotes)
                   within the form above and click "Submit"
                 </li>
@@ -177,6 +179,40 @@ class ProfilePage extends Component {
               </button>
             </p>
           </form>
+
+          <Context.Consumer>
+            {value => (
+              <div className="watchpage">
+                <section>
+                  {this.context.videos.map(video => (
+                    <div key={video.id}>
+                      <iframe
+                        className="videos"
+                        title="newVideo"
+                        width="46.3%"
+                        height="473"
+                        src={video.video}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                      <div>
+                        <button
+                          className="delete"
+                          type="button"
+                          onClick={e => this.videosClickDelete(e, video.id)}
+                        >
+                          <i></i>
+                          {''}
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </section>
+              </div>
+            )}
+          </Context.Consumer>
 
           <h3>Submit Bandcamp embedded links for your music project</h3>
           <form
@@ -239,6 +275,37 @@ class ProfilePage extends Component {
             </p>
           </form>
 
+          <Context.Consumer>
+            {value => (
+              <div className="listenpage">
+                <section>
+                  {this.context.songs.map(song => (
+                    <div key={song.id}>
+                      <iframe
+                        title="bandcamp alum"
+                        border="0"
+                        width="350px"
+                        height="470px"
+                        src={song.song}
+                      ></iframe>
+                      <div>
+                        <button
+                          className="delete"
+                          type="button"
+                          onClick={e => this.songsClickDelete(e, song.id)}
+                        >
+                          <i></i>
+                          {''}
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </section>
+              </div>
+            )}
+          </Context.Consumer>
+
           <h3>Submit your music project's upcoming shows</h3>
           <form
             className="band-form"
@@ -273,8 +340,42 @@ class ProfilePage extends Component {
             </p>
           </form>
 
+          <Context.Consumer>
+            {value => (
+              <div className="showspage">
+                <section className="image-showspage">
+                  {this.context.shows.map(show => (
+                    <div>
+                      <div key={show.id}>
+                        <h3>{show.venue}</h3>
+                        <h3>{show.date}</h3>
+                        <h3>{show.city}</h3>
+                        <br />
+                      </div>
+                      <div>
+                        <button
+                          className="delete"
+                          type="button"
+                          onClick={e => this.showsClickDelete(e, show.id)}
+                        >
+                          <i></i>
+                          {''}
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </section>
+              </div>
+            )}
+          </Context.Consumer>
+
           <h3>Submit social media links for your music project</h3>
-          <form className="band-form" ref={form => (this.form = form)}>
+          <form
+            className="band-form"
+            ref={form => (this.form = form)}
+            onSubmit={e => this.linksHandleSubmit(e)}
+          >
             <p>
               <label htmlFor="bandSocial-Facebook">Facebook: </label>
               <input
@@ -282,10 +383,6 @@ class ProfilePage extends Component {
                 type="text"
                 name="facebook"
                 id="bandSocial-Facebook"
-                onChange={e =>
-                  this.context.updateLink('facebook', e.target.value)
-                }
-                value={link.facebook}
               />
             </p>
 
@@ -296,10 +393,6 @@ class ProfilePage extends Component {
                 type="text"
                 name="twitter"
                 id="bandSocial-Twitter"
-                onChange={e =>
-                  this.context.updateLink('twitter', e.target.value)
-                }
-                value={link.twitter}
               />
             </p>
 
@@ -310,10 +403,6 @@ class ProfilePage extends Component {
                 type="text"
                 name="instagram"
                 id="bandSocial-Instagram"
-                onChange={e =>
-                  this.context.updateLink('instagram', e.target.value)
-                }
-                value={link.instagram}
               />
             </p>
 
@@ -324,10 +413,6 @@ class ProfilePage extends Component {
                 type="text"
                 name="youtube"
                 id="bandSocial-YouTube"
-                onChange={e =>
-                  this.context.updateLink('youtube', e.target.value)
-                }
-                value={link.youtube}
               />
             </p>
 
@@ -338,10 +423,6 @@ class ProfilePage extends Component {
                 type="text"
                 name="soundcloud"
                 id="bandSocial-SoundCloud"
-                onChange={e =>
-                  this.context.updateLink('soundcloud', e.target.value)
-                }
-                value={link.soundcloud}
               />
             </p>
 
@@ -352,14 +433,10 @@ class ProfilePage extends Component {
                 type="text"
                 name="bandcamp"
                 id="bandSocial-Bandcamp"
-                onChange={e =>
-                  this.context.updateLink('bandcamp', e.target.value)
-                }
-                value={link.bandcamp}
               />
             </p>
 
-            <p>
+            {/* <p>
               <label htmlFor="bandSocial-Email">Email: </label>
               <input
                 placeholder="spanishprisoners@gmail.com"
@@ -367,12 +444,17 @@ class ProfilePage extends Component {
                 name="email"
                 id="band-Email"
                 onChange={e =>
-                  this.context.updateLink('email', `mailto:${e.target.value}`)
+                  this.context.linksHandleSubmit(
+                    'email',
+                    `mailto:${e.target.value}`
+                  )
                 }
                 value={link.email.replace('mailto:', '')}
               />
-            </p>
-            <p>Links update on change</p>
+            </p> */}
+            <button className="submit-button" type="submit">
+              Submit
+            </button>
           </form>
 
           <div className="band-home-button">

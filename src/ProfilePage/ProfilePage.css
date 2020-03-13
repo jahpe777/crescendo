@@ -49,6 +49,12 @@ button.submit-button {
   cursor: pointer;
 }
 
+button.delete {
+  margin: 0px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
 .show-audio-help-false {
   display: none;
 }

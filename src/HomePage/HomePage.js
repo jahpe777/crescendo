@@ -8,25 +8,19 @@ class HomePage extends Component {
 
   render() {
     return (
-      <Context.Consumer>
-        {value => (
-          <div className="homePage">
-            <section>
-              <Link to="/listen">
-                {this.context.images.map(image => (
-                  <div key={image.id}>
-                    <img
-                      className="image-homePage"
-                      src={image.image}
-                      alt="Spanish Prisoners"
-                    />
-                  </div>
-                ))}
-              </Link>
-            </section>
-          </div>
-        )}
-      </Context.Consumer>
+      <div className="homePage">
+        <section>
+          <Link to="/listen">
+            <div>
+              <img
+                className="image-homePage"
+                src={this.context.contents.image}
+                alt="image-band"
+              />
+            </div>
+          </Link>
+        </section>
+      </div>
     );
   }
 }

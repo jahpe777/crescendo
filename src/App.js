@@ -28,11 +28,20 @@ class App extends Component {
 
       users: [],
 
-      images: [],
-
       videos: [],
 
       songs: [],
+
+      contents: {
+        image: '',
+        facebook: '',
+        twitter: '',
+        instagram: '',
+        youtube: '',
+        soundcloud: '',
+        bandcamp: '',
+        email: ''
+      },
 
       link: {
         facebook: '',
@@ -75,6 +84,22 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
+      updateUser: (content, user_id = '1') => {
+        fetch(`${config.API_ENDPOINT}/api/users`, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'PATCH',
+          body: JSON.stringify({ content, user_id })
+        })
+          .then(res => res.json())
+          .then(res => {
+            console.log(res);
+            this.setState({ contents: [...this.state.contents, res] });
+          })
+          .catch(err => console.log(err));
+      },
+
       addNewVideo: (video, user_id = '1') => {
         fetch(`${config.API_ENDPOINT}/api/videos`, {
           headers: {
@@ -91,6 +116,25 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
+      handleDeleteVideo: (videoId, user_id = '1') => {
+        fetch(`${config.API_ENDPOINT}/api/videos/${videoId}`, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'DELETE',
+          body: JSON.stringify(videoId, user_id)
+        })
+          .then(res => {
+            if (!res.ok) return res.json().then(e => Promise.reject(e));
+            return true;
+          })
+          .then(deletedVideo => {
+            this.setState({
+              videos: this.state.videos.filter(video => video.id !== videoId)
+            });
+          });
+      },
+
       addNewSong: (song, user_id = '1') => {
         fetch(`${config.API_ENDPOINT}/api/songs`, {
           headers: {
@@ -105,9 +149,27 @@ class App extends Component {
           .then(res => res.json())
           .then(res => {
             this.setState({ songs: [...this.state.songs, res] });
-            console.log('yayayay', song, res);
           })
           .catch(err => console.log(err));
+      },
+
+      handleDeleteSong: (songId, user_id = '1') => {
+        fetch(`${config.API_ENDPOINT}/api/songs/${songId}`, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'DELETE',
+          body: JSON.stringify(songId, user_id)
+        })
+          .then(res => {
+            if (!res.ok) return res.json().then(e => Promise.reject(e));
+            return true;
+          })
+          .then(deletedSong => {
+            this.setState({
+              songs: this.state.songs.filter(song => song.id !== songId)
+            });
+          });
       },
 
       addNewShow: (show, user_id = '1') => {
@@ -124,6 +186,25 @@ class App extends Component {
             this.setState({ shows: [...this.state.shows, res] });
           })
           .catch(err => console.log(err));
+      },
+
+      handleDeleteShow: (showId, user_id = '1') => {
+        fetch(`${config.API_ENDPOINT}/api/shows/${showId}`, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'DELETE',
+          body: JSON.stringify(showId, user_id)
+        })
+          .then(res => {
+            if (!res.ok) return res.json().then(e => Promise.reject(e));
+            return true;
+          })
+          .then(deletedShow => {
+            this.setState({
+              shows: this.state.shows.filter(show => show.id !== showId)
+            });
+          });
       },
 
       addNewEmail: (email, user_id = '1') => {
@@ -167,21 +248,21 @@ class App extends Component {
         cb();
       },
 
-      addNewImage: image => {
-        const { value } = image;
-        const newImage = { value };
-        this.setState({ images: [...this.state.images, newImage] });
-      },
+      // addNewImage: image => {
+      //   const { value } = image;
+      //   const newImage = { value };
+      //   this.setState({ images: [...this.state.images, newImage] });
+      // },
 
-      addNewLink: link => {
-        this.setState({ link });
-      },
+      // addNewLink: link => {
+      //   this.setState({ link });
+      // },
 
-      updateLink: (link, url) => {
-        const links = this.state.link;
-        links[link] = url;
-        this.setState({ link: links });
-      },
+      // updateLink: (link, url) => {
+      //   const links = this.state.link;
+      //   links[link] = url;
+      //   this.setState({ link: links });
+      // },
 
       drawerClickHandler: () => {
         this.setState({ sideDrawerOpen: !this.state.sideDrawerOpen });
@@ -193,69 +274,44 @@ class App extends Component {
     this.setState({
       authToken: window.localStorage.getItem('authToken')
     });
-    // need to fetch the BE to get all shows from the database
-    Promise.all([
-      fetch(`${config.API_ENDPOINT}/api/shows`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json'
-        }
-      }),
-      fetch(`${config.API_ENDPOINT}/api/songs`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json'
-        }
-      }),
-      fetch(`${config.API_ENDPOINT}/api/videos`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
-    ])
-      .then(([res1, res2, res3]) => {
-        if (!res1.ok || !res2.ok || !res3.ok) {
-          return (res1.json(), res2.json(), res3.json()).then(error =>
-            Promise.reject(error)
-          );
-        }
-        return { shows: res1.json(), songs: res2.json(), videos: res3.json() };
-      })
-      .then(res => {
-        const { shows, songs, videos } = res;
-        this.setState({ shows, songs, videos });
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
-  }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     authToken: window.localStorage.getItem('authToken')
-  //   });
-  //   // need to fetch the BE to get all shows from the database
-  //   fetch(`${config.API_ENDPOINT}/api/songs`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     }
-  //   })
-  //     .then(res => {
-  //       if (!res.ok) {
-  //         return res.json().then(error => Promise.reject(error));
-  //       }
-  //       return res.json();
-  //     })
-  //     .then(songs => {
-  //       // still do this step
-  //       this.setState({ songs });
-  //     })
-  //     .catch(error => {
-  //       this.setState({ error });
-  //     });
-  // }
+    let urls = [
+      `${config.API_ENDPOINT}/api/users`,
+      `${config.API_ENDPOINT}/api/shows`,
+      `${config.API_ENDPOINT}/api/songs`,
+      `${config.API_ENDPOINT}/api/videos`
+    ];
+
+    Promise.all(
+      urls.map(url =>
+        fetch(url, {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+          .then(res => {
+            if (!res.ok) {
+              return res.json().then(error => Promise.reject(error));
+            }
+            return res.json();
+          })
+          .then(data => {
+            return data;
+          })
+          .catch(error => {
+            this.setState({ error });
+          })
+      )
+    ).then(data => {
+      this.setState({
+        contents: data[0],
+        shows: data[1],
+        songs: data[2],
+        videos: data[3]
+      });
+    });
+  }
 
   render() {
     return (

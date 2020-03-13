@@ -3,13 +3,12 @@ import React from 'react';
 export default React.createContext({
   users: [],
 
-  images: [],
-
   videos: [],
 
   songs: [],
 
-  link: {
+  contents: {
+    image: '',
     facebook: '',
     twitter: '',
     instagram: '',
