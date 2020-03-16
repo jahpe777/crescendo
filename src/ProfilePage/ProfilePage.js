@@ -14,6 +14,7 @@ class ProfilePage extends Component {
     }
 
     this.state = {
+      imageHelp: false,
       audioHelp: false,
       videoHelp: false
     };
@@ -22,9 +23,9 @@ class ProfilePage extends Component {
   imagesHandleSubmit = e => {
     e.preventDefault();
     const newImage = {
-      value: e.target.bandImage.value
+      image: e.target.bandImage.value
     };
-    if (newImage.value.includes('jpg' || 'png')) {
+    if (newImage.image.includes('jpg' || 'png')) {
       this.context.updateUser(newImage);
       e.target.reset();
     } else {
@@ -88,15 +89,19 @@ class ProfilePage extends Component {
       instagram: e.target.instagram.value,
       youtube: e.target.youtube.value,
       soundcloud: e.target.soundcloud.value,
-      bandcamp: e.target.bandcamp.value,
-      email: e.target.email.value !== '' ? 'mailto:' + e.target.email.value : ''
+      bandcamp: e.target.bandcamp.value
+      // contact_email:
+      //   e.target.contact_email.value !== ''
+      //     ? 'mailto:' + e.target.contact_email.value
+      //     : ''
     };
+    console.log(newLink);
     this.context.updateUser(newLink);
     e.target.reset();
   };
 
   render() {
-    const { link } = this.context;
+    // const { link } = this.context;
     return (
       <div className="profilePage">
         <section className="image-profilePage">
@@ -120,11 +125,51 @@ class ProfilePage extends Component {
             </p>
 
             <p>
+              <a
+                href="/imagehelp"
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ imageHelp: !this.state.imageHelp });
+                }}
+              >
+                {this.state.imageHelp ? 'Hide Help' : 'Show Help'}
+              </a>
+            </p>
+
+            <div className={`show-image-help-${this.state.imageHelp}`}>
+              <ul className="image-help">
+                <li className="image-help-li">
+                  Enter in an image URL (jpg or png) to submit
+                </li>
+                <li className="image-help-li">
+                  The image you submit will be the cover image of your website
+                </li>
+                <li className="image-help-li">
+                  Clicking on this image will link to your "Listen" page
+                </li>
+              </ul>
+            </div>
+
+            <p>
               <button className="submit-button" type="submit">
                 Submit
               </button>
             </p>
           </form>
+
+          <div className="homePage">
+            <section>
+              <Link to="/listen">
+                <div>
+                  <img
+                    className="image-homePage"
+                    src={this.context.userProfile.image}
+                    alt="image-band"
+                  />
+                </div>
+              </Link>
+            </section>
+          </div>
 
           <h3>Submit YouTube embedded links for your music project</h3>
           <form
@@ -374,7 +419,8 @@ class ProfilePage extends Component {
           <form
             className="band-form"
             ref={form => (this.form = form)}
-            onSubmit={e => this.linksHandleSubmit(e)}
+            // onSubmit={e => this.linksHandleSubmit(e)}
+            onSubmit={this.linksHandleSubmit}
           >
             <p>
               <label htmlFor="bandSocial-Facebook">Facebook: </label>
@@ -435,23 +481,25 @@ class ProfilePage extends Component {
                 id="bandSocial-Bandcamp"
               />
             </p>
-
-            {/* <p>
+            <p>
               <label htmlFor="bandSocial-Email">Email: </label>
               <input
                 placeholder="spanishprisoners@gmail.com"
                 type="text"
-                name="email"
+                name="contact_email"
                 id="band-Email"
-                onChange={e =>
-                  this.context.linksHandleSubmit(
-                    'email',
-                    `mailto:${e.target.value}`
-                  )
-                }
-                value={link.email.replace('mailto:', '')}
+                // onSubmit={e =>
+                //   this.context.linksHandleSubmit(
+                //     'email',
+                //     `mailto:${e.target.value}`
+                //   )
+                // }
+                // value={this.context.userProfile.contact_email.replace(
+                //   'mailto:',
+                //   ''
+                // )}
               />
-            </p> */}
+            </p>
             <button className="submit-button" type="submit">
               Submit
             </button>

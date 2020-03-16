@@ -14,7 +14,7 @@ class HomePage extends Component {
             <div>
               <img
                 className="image-homePage"
-                src={this.context.contents.image}
+                src={this.context.userProfile.image}
                 alt="image-band"
               />
             </div>

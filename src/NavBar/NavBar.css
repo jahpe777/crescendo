@@ -55,6 +55,12 @@ a.login-link {
   width: 40px;
 }
 
+@media screen and (min-width: 415px) and (max-width: 1050px) {
+  .nav-li {
+    padding: 15px;
+  }
+}
+
 @media screen and (max-width: 415px) {
   section.navbar {
     flex-direction: column;
@@ -62,10 +68,9 @@ a.login-link {
   .nav-li {
     padding: 10px;
   }
-}
 
-@media screen and (min-width: 415px) and (max-width: 1050px) {
-  .nav-li {
-    padding: 15px;
+  .nav-button {
+    width: 115px;
+    height: 40px;
   }
 }

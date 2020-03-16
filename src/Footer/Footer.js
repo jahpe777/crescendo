@@ -10,13 +10,13 @@ class Footer extends Component {
       <section className="footer">
         <ul className="links">
           {this.context.authToken
-            ? Object.keys(this.context.link).map(key =>
-                this.context.link[key] !== '' ? (
+            ? Object.keys(this.context.userProfile).map(key =>
+                this.context.userProfile[key] !== '' ? (
                   <li>
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      href={this.context.link[key]}
+                      href={this.context.userProfile[key]}
                     >
                       <img
                         className="icons"

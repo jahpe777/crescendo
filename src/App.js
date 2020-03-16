@@ -32,7 +32,7 @@ class App extends Component {
 
       songs: [],
 
-      contents: {
+      userProfile: {
         image: '',
         facebook: '',
         twitter: '',
@@ -40,18 +40,18 @@ class App extends Component {
         youtube: '',
         soundcloud: '',
         bandcamp: '',
-        email: ''
+        contact_email: ''
       },
 
-      link: {
-        facebook: '',
-        twitter: '',
-        instagram: '',
-        youtube: '',
-        soundcloud: '',
-        bandcamp: '',
-        email: ''
-      },
+      // link: {
+      //   facebook: '',
+      //   twitter: '',
+      //   instagram: '',
+      //   youtube: '',
+      //   soundcloud: '',
+      //   bandcamp: '',
+      //   contact_email: ''
+      // },
 
       shows: [],
 
@@ -85,17 +85,20 @@ class App extends Component {
       },
 
       updateUser: (content, user_id = '1') => {
-        fetch(`${config.API_ENDPOINT}/api/users`, {
+        console.log(content);
+        fetch(`${config.API_ENDPOINT}/api/users/${user_id}`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'PATCH',
-          body: JSON.stringify({ content, user_id })
+          body: JSON.stringify(content)
         })
-          .then(res => res.json())
-          .then(res => {
-            console.log(res);
-            this.setState({ contents: [...this.state.contents, res] });
+          .then(() => {
+            this.setState({
+              userProfile: Object.assign(content, this.state.userProfile)
+            });
+            // console.log(content);
+            console.log(this.state.userProfile);
           })
           .catch(err => console.log(err));
       },
@@ -248,22 +251,6 @@ class App extends Component {
         cb();
       },
 
-      // addNewImage: image => {
-      //   const { value } = image;
-      //   const newImage = { value };
-      //   this.setState({ images: [...this.state.images, newImage] });
-      // },
-
-      // addNewLink: link => {
-      //   this.setState({ link });
-      // },
-
-      // updateLink: (link, url) => {
-      //   const links = this.state.link;
-      //   links[link] = url;
-      //   this.setState({ link: links });
-      // },
-
       drawerClickHandler: () => {
         this.setState({ sideDrawerOpen: !this.state.sideDrawerOpen });
       }
@@ -305,7 +292,7 @@ class App extends Component {
       )
     ).then(data => {
       this.setState({
-        contents: data[0],
+        userProfile: data[0][0],
         shows: data[1],
         songs: data[2],
         videos: data[3]

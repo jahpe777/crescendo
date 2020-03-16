@@ -9,12 +9,17 @@ import Context from '../Contexts/Context';
 class NavBar extends React.Component {
   static contextType = Context;
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <section className="navbar">
         <div className="drawer-toggle-div">
           <DrawerToggleButton />
         </div>
+
         <h1 className="crescendo-home">
           <Link to="/">Crescendo</Link>
         </h1>

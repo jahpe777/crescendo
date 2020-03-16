@@ -7,7 +7,7 @@ export default React.createContext({
 
   songs: [],
 
-  contents: {
+  userProfile: {
     image: '',
     facebook: '',
     twitter: '',

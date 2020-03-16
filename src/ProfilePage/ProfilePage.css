@@ -71,6 +71,22 @@ button.delete {
   margin: 20px;
 }
 
+.image-help {
+  list-style-type: none;
+}
+
+.image-help-li {
+  margin: 20px;
+}
+
+.show-image-help-false {
+  display: none;
+}
+
+.show-image-help-true {
+  display: block;
+}
+
 .show-video-help-false {
   display: none;
 }
@@ -85,4 +101,19 @@ button.delete {
 
 .video-help-li {
   margin: 20px;
+}
+
+.drawer-toggle-div {
+  display: none;
+}
+
+@media screen and (max-width: 727px) {
+  .drawer-toggle-div {
+    display: block;
+    margin-right: 50px;
+  }
+
+  .navlinks {
+    display: none;
+  }
 }
