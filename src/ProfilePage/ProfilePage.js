@@ -89,13 +89,12 @@ class ProfilePage extends Component {
       instagram: e.target.instagram.value,
       youtube: e.target.youtube.value,
       soundcloud: e.target.soundcloud.value,
-      bandcamp: e.target.bandcamp.value
-      // contact_email:
-      //   e.target.contact_email.value !== ''
-      //     ? 'mailto:' + e.target.contact_email.value
-      //     : ''
+      bandcamp: e.target.bandcamp.value,
+      contact_email:
+        e.target.contact_email.value !== ''
+          ? 'mailto:' + e.target.contact_email.value
+          : ''
     };
-    console.log(newLink);
     this.context.updateUser(newLink);
     e.target.reset();
   };
@@ -419,8 +418,8 @@ class ProfilePage extends Component {
           <form
             className="band-form"
             ref={form => (this.form = form)}
-            // onSubmit={e => this.linksHandleSubmit(e)}
-            onSubmit={this.linksHandleSubmit}
+            onSubmit={e => this.linksHandleSubmit(e)}
+            // onSubmit={this.linksHandleSubmit}
           >
             <p>
               <label htmlFor="bandSocial-Facebook">Facebook: </label>

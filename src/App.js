@@ -17,6 +17,8 @@ import ShowsPage from './ShowsPage/ShowsPage';
 import SignUpPage from './SignUpPage/SignUpPage';
 import SideDrawer from './SideDrawer/SideDrawer';
 
+import AuthApiService from './Services/token-service';
+
 import Context from './Contexts/Context';
 import config from './config';
 
@@ -24,6 +26,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      history: {
+        push: () => {}
+      },
+
+      error: null,
+
       authToken: false,
 
       users: [],
@@ -68,64 +76,60 @@ class App extends Component {
         signup: 'Mailing List'
       },
 
-      addNewUser: user => {
+      addNewUser: newUser => {
         fetch(`${config.API_ENDPOINT}/api/users`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({ user })
+          body: JSON.stringify(newUser)
         })
           .then(res => res.json())
           .then(res => {
-            console.log(res);
             this.setState({ users: [...this.state.users, res] });
           })
           .catch(err => console.log(err));
       },
 
-      updateUser: (content, user_id = '1') => {
-        console.log(content);
-        fetch(`${config.API_ENDPOINT}/api/users/${user_id}`, {
+      updateUser: newContent => {
+        fetch(`${config.API_ENDPOINT}/api/users`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.state.authToken}`
           },
           method: 'PATCH',
-          body: JSON.stringify(content)
+          body: JSON.stringify(newContent)
         })
           .then(() => {
             this.setState({
-              userProfile: Object.assign(content, this.state.userProfile)
+              userProfile: Object.assign(newContent, this.state.userProfile)
             });
-            // console.log(content);
-            console.log(this.state.userProfile);
           })
           .catch(err => console.log(err));
       },
 
-      addNewVideo: (video, user_id = '1') => {
+      addNewVideo: video => {
         fetch(`${config.API_ENDPOINT}/api/videos`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({ video, user_id })
+          body: JSON.stringify(video)
         })
           .then(res => res.json())
           .then(res => {
-            console.log(res);
             this.setState({ videos: [...this.state.videos, res] });
           })
           .catch(err => console.log(err));
       },
 
-      handleDeleteVideo: (videoId, user_id = '1') => {
+      handleDeleteVideo: videoId => {
         fetch(`${config.API_ENDPOINT}/api/videos/${videoId}`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'DELETE',
-          body: JSON.stringify(videoId, user_id)
+          body: JSON.stringify(videoId)
         })
           .then(res => {
             if (!res.ok) return res.json().then(e => Promise.reject(e));
@@ -138,16 +142,13 @@ class App extends Component {
           });
       },
 
-      addNewSong: (song, user_id = '1') => {
+      addNewSong: song => {
         fetch(`${config.API_ENDPOINT}/api/songs`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({
-            song,
-            user_id
-          })
+          body: JSON.stringify(song)
         })
           .then(res => res.json())
           .then(res => {
@@ -156,13 +157,13 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
-      handleDeleteSong: (songId, user_id = '1') => {
+      handleDeleteSong: songId => {
         fetch(`${config.API_ENDPOINT}/api/songs/${songId}`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'DELETE',
-          body: JSON.stringify(songId, user_id)
+          body: JSON.stringify(songId)
         })
           .then(res => {
             if (!res.ok) return res.json().then(e => Promise.reject(e));
@@ -175,14 +176,14 @@ class App extends Component {
           });
       },
 
-      addNewShow: (show, user_id = '1') => {
-        show.user_id = user_id;
+      addNewShow: show => {
         fetch(`${config.API_ENDPOINT}/api/shows`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.state.authToken}`
           },
           method: 'POST',
-          body: JSON.stringify({ show, user_id })
+          body: JSON.stringify(show)
         })
           .then(res => res.json())
           .then(res => {
@@ -191,13 +192,13 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
-      handleDeleteShow: (showId, user_id = '1') => {
+      handleDeleteShow: showId => {
         fetch(`${config.API_ENDPOINT}/api/shows/${showId}`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'DELETE',
-          body: JSON.stringify(showId, user_id)
+          body: JSON.stringify(showId)
         })
           .then(res => {
             if (!res.ok) return res.json().then(e => Promise.reject(e));
@@ -210,13 +211,13 @@ class App extends Component {
           });
       },
 
-      addNewEmail: (email, user_id = '1') => {
+      addNewEmail: email => {
         fetch(`${config.API_ENDPOINT}/api/emails`, {
           headers: {
             'Content-Type': 'application/json'
           },
           method: 'POST',
-          body: JSON.stringify({ email, user_id })
+          body: JSON.stringify(email)
         })
           .then(res => {
             this.setState({ emails: [...this.state.emails, res] });
@@ -224,14 +225,35 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
-      signUp: (e, cb) => {
+      signUp: e => {
         e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
 
-        window.localStorage.setItem('authToken', true);
-        this.setState({ authToken: true });
-        cb();
+        const { user_email, password } = e.target;
+
+        this.setState({ error: null });
+        AuthApiService.postUser({
+          user_name: user_email.value,
+          password: password.value
+        })
+          .then(user => {
+            user_email.value = '';
+            password.value = '';
+          })
+          .catch(res => {
+            this.setState({ error: res.error });
+          });
+
+        // const newUser = {
+        //   email: e.target.email.value,
+        //   password: e.target.password.value
+        // };
+
+        // this.addNewUser(newUser);
+        // e.target.reset();
+
+        // window.localStorage.setItem('authToken', true);
+        // this.setState({ authToken: true });
+        // cb();
       },
 
       login: (e, cb) => {
@@ -239,9 +261,19 @@ class App extends Component {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
-        window.localStorage.setItem('authToken', true);
-        this.setState({ authToken: true });
-        cb();
+        fetch('http://localhost:7000/api/auth/login', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ user_email: email, password })
+        })
+          .then(res => res.json())
+          .then(resJson => {
+            window.localStorage.setItem('authToken', resJson.authToken);
+            this.setState({ authToken: resJson.authToken });
+            cb();
+          });
       },
 
       logout: (e, cb) => {
@@ -292,7 +324,7 @@ class App extends Component {
       )
     ).then(data => {
       this.setState({
-        userProfile: data[0][0],
+        // userProfile: data[0][0],
         shows: data[1],
         songs: data[2],
         videos: data[3]
