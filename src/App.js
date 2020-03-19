@@ -17,7 +17,7 @@ import ShowsPage from './ShowsPage/ShowsPage';
 import SignUpPage from './SignUpPage/SignUpPage';
 import SideDrawer from './SideDrawer/SideDrawer';
 
-import AuthApiService from './Services/token-service';
+import AuthApiService from './Services/auth-api-service';
 
 import Context from './Contexts/Context';
 import config from './config';
@@ -111,7 +111,8 @@ class App extends Component {
       addNewVideo: video => {
         fetch(`${config.API_ENDPOINT}/api/videos`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.state.authToken}`
           },
           method: 'POST',
           body: JSON.stringify(video)
@@ -126,7 +127,8 @@ class App extends Component {
       handleDeleteVideo: videoId => {
         fetch(`${config.API_ENDPOINT}/api/videos/${videoId}`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.state.authToken}`
           },
           method: 'DELETE',
           body: JSON.stringify(videoId)
@@ -145,7 +147,8 @@ class App extends Component {
       addNewSong: song => {
         fetch(`${config.API_ENDPOINT}/api/songs`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.state.authToken}`
           },
           method: 'POST',
           body: JSON.stringify(song)
@@ -160,7 +163,8 @@ class App extends Component {
       handleDeleteSong: songId => {
         fetch(`${config.API_ENDPOINT}/api/songs/${songId}`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.state.authToken}`
           },
           method: 'DELETE',
           body: JSON.stringify(songId)
@@ -195,7 +199,8 @@ class App extends Component {
       handleDeleteShow: showId => {
         fetch(`${config.API_ENDPOINT}/api/shows/${showId}`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.state.authToken}`
           },
           method: 'DELETE',
           body: JSON.stringify(showId)
@@ -214,7 +219,8 @@ class App extends Component {
       addNewEmail: email => {
         fetch(`${config.API_ENDPOINT}/api/emails`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.state.authToken}`
           },
           method: 'POST',
           body: JSON.stringify(email)
