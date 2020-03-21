@@ -32,7 +32,7 @@ class App extends Component {
 
       error: null,
 
-      authToken: false,
+      // authToken: false,
 
       users: [],
 
@@ -95,7 +95,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/users`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.state.authToken}`
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`
           },
           method: 'PATCH',
           body: JSON.stringify(newContent)
@@ -112,7 +112,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/videos`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.state.authToken}`
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`
           },
           method: 'POST',
           body: JSON.stringify(video)
@@ -128,7 +128,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/videos/${videoId}`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.state.authToken}`
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`
           },
           method: 'DELETE',
           body: JSON.stringify(videoId)
@@ -148,7 +148,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/songs`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.state.authToken}`
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`
           },
           method: 'POST',
           body: JSON.stringify(song)
@@ -164,7 +164,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/songs/${songId}`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.state.authToken}`
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`
           },
           method: 'DELETE',
           body: JSON.stringify(songId)
@@ -184,7 +184,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/shows`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.state.authToken}`
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`
           },
           method: 'POST',
           body: JSON.stringify(show)
@@ -200,7 +200,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/shows/${showId}`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.state.authToken}`
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`
           },
           method: 'DELETE',
           body: JSON.stringify(showId)
@@ -220,7 +220,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/emails`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.state.authToken}`
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`
           },
           method: 'POST',
           body: JSON.stringify(email)
@@ -330,7 +330,7 @@ class App extends Component {
       )
     ).then(data => {
       this.setState({
-        // userProfile: data[0][0],
+        userProfile: data[0][0],
         shows: data[1],
         songs: data[2],
         videos: data[3]

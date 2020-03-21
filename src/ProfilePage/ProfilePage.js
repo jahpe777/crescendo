@@ -22,9 +22,7 @@ class ProfilePage extends Component {
 
   imagesHandleSubmit = e => {
     e.preventDefault();
-    const newImage = {
-      image: e.target.bandImage.value
-    };
+    const newImage = { image: e.target.bandImage.value };
     if (newImage.image.includes('jpg' || 'png')) {
       this.context.updateUser(newImage);
       e.target.reset();
@@ -35,8 +33,8 @@ class ProfilePage extends Component {
 
   videosHandleSubmit = e => {
     e.preventDefault();
-    const newVideo = e.target.bandVideo.value;
-    if (newVideo.includes('youtube')) {
+    const newVideo = { video: e.target.bandVideo.value };
+    if (newVideo.video.includes('youtube')) {
       this.context.addNewVideo(newVideo);
       e.target.reset();
     } else {
@@ -51,8 +49,8 @@ class ProfilePage extends Component {
 
   songsHandleSubmit = e => {
     e.preventDefault();
-    const newSong = e.target.bandAudio.value;
-    if (newSong.includes('bandcamp')) {
+    const newSong = { song: e.target.bandAudio.value };
+    if (newSong.song.includes('bandcamp')) {
       this.context.addNewSong(newSong);
       e.target.reset();
     } else {
