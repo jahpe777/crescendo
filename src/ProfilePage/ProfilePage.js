@@ -158,11 +158,15 @@ class ProfilePage extends Component {
             <section>
               <Link to="/listen">
                 <div>
-                  <img
-                    className="image-homePage"
-                    src={this.context.userProfile.image}
-                    alt="image-band"
-                  />
+                  {this.context.userProfile.image !== '' ? (
+                    <img
+                      className="image-homePage"
+                      src={this.context.userProfile.image}
+                      alt="image-band"
+                    />
+                  ) : (
+                    ''
+                  )}
                 </div>
               </Link>
             </section>
@@ -476,6 +480,7 @@ class ProfilePage extends Component {
                 type="text"
                 name="bandcamp"
                 id="bandSocial-Bandcamp"
+                defaultValue={this.context.userProfile.bandcamp}
               />
             </p>
             <p>
@@ -485,16 +490,10 @@ class ProfilePage extends Component {
                 type="text"
                 name="contact_email"
                 id="band-Email"
-                // onSubmit={e =>
-                //   this.context.linksHandleSubmit(
-                //     'email',
-                //     `mailto:${e.target.value}`
-                //   )
-                // }
-                // value={this.context.userProfile.contact_email.replace(
-                //   'mailto:',
-                //   ''
-                // )}
+                defaultValue={this.context.userProfile.contact_email.replace(
+                  'mailto:',
+                  ''
+                )}
               />
             </p>
             <button className="submit-button" type="submit">

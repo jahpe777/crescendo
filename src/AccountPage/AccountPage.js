@@ -25,9 +25,7 @@ class AccountPage extends Component {
             className="account-form"
             ref={form => (this.form = form)}
             onSubmit={e =>
-              this.context.signUp(
-                e /*, () => this.props.history.push('/profile')*/
-              )
+              this.context.signUp(e, () => this.props.history.push('/login'))
             }
           >
             <p>

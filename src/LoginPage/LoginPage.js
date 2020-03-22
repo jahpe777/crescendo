@@ -25,7 +25,10 @@ class LoginPage extends Component {
             className="account-form"
             ref={form => (this.form = form)}
             onSubmit={e =>
-              this.context.login(e, () => this.props.history.push('/profile'))
+              this.context.login(e, () => {
+                this.props.history.push('/profile');
+                window.location.reload();
+              })
             }
           >
             <p>

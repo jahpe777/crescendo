@@ -6,12 +6,21 @@ class Footer extends Component {
   static contextType = Context;
 
   render() {
+    const iconKeys = [
+      'facebook',
+      'twitter',
+      'instagram',
+      'youtube',
+      'soundcloud',
+      'bandcamp'
+    ];
     return (
       <section className="footer">
         <ul className="links">
           {this.context.authToken
             ? Object.keys(this.context.userProfile).map(key =>
-                this.context.userProfile[key] !== '' ? (
+                this.context.userProfile[key] !== '' &&
+                iconKeys.includes(key) ? (
                   <li>
                     <a
                       target="_blank"
@@ -30,6 +39,20 @@ class Footer extends Component {
                 )
               )
             : ''}
+          {this.context.authToken &&
+          this.context.userProfile.contact_email !== '' ? (
+            <li>
+              <a href={`mailto:${this.context.userProfile.contact_email}`}>
+                <img
+                  className="icons"
+                  alt="Contact Email"
+                  src="images/email.png"
+                />
+              </a>
+            </li>
+          ) : (
+            ''
+          )}
         </ul>
       </section>
     );

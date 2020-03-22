@@ -100,9 +100,10 @@ class App extends Component {
           method: 'PATCH',
           body: JSON.stringify(newContent)
         })
+          .then(res => res)
           .then(() => {
             this.setState({
-              userProfile: Object.assign(newContent, this.state.userProfile)
+              userProfile: Object.assign(this.state.userProfile, newContent)
             });
           })
           .catch(err => console.log(err));
@@ -231,19 +232,20 @@ class App extends Component {
           .catch(err => console.log(err));
       },
 
-      signUp: e => {
+      signUp: (e, cb) => {
         e.preventDefault();
 
-        const { user_email, password } = e.target;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
 
         this.setState({ error: null });
         AuthApiService.postUser({
-          user_name: user_email.value,
-          password: password.value
+          user_email: email,
+          password
         })
           .then(user => {
-            user_email.value = '';
-            password.value = '';
+            alert('User successfully Created - Now Login');
+            cb();
           })
           .catch(res => {
             this.setState({ error: res.error });
@@ -285,7 +287,24 @@ class App extends Component {
       logout: (e, cb) => {
         e.preventDefault();
         window.localStorage.removeItem('authToken');
-        this.setState({ authToken: false });
+        this.setState({
+          authToken: false,
+          shows: [],
+          emails: [],
+          songs: [],
+          videos: [],
+          users: [],
+          userProfile: {
+            image: '',
+            facebook: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
+            soundcloud: '',
+            bandcamp: '',
+            contact_email: ''
+          }
+        });
         cb();
       },
 
@@ -301,7 +320,7 @@ class App extends Component {
     });
 
     let urls = [
-      `${config.API_ENDPOINT}/api/users`,
+      `${config.API_ENDPOINT}/api/users/loggedin`,
       `${config.API_ENDPOINT}/api/shows`,
       `${config.API_ENDPOINT}/api/songs`,
       `${config.API_ENDPOINT}/api/videos`
@@ -312,7 +331,8 @@ class App extends Component {
         fetch(url, {
           method: 'GET',
           headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            Authorization: `Bearer ${window.localStorage.getItem('authToken')}`
           }
         })
           .then(res => {
@@ -330,7 +350,7 @@ class App extends Component {
       )
     ).then(data => {
       this.setState({
-        userProfile: data[0][0],
+        userProfile: data[0],
         shows: data[1],
         songs: data[2],
         videos: data[3]
