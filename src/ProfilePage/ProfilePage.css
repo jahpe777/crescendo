@@ -55,23 +55,23 @@ button.delete {
   cursor: pointer;
 }
 
-.show-audio-help-false {
+.show-help-false {
   display: none;
 }
 
-.show-audio-help-true {
+.show-help-true {
   display: block;
 }
 
-.audio-help {
+.help {
   list-style-type: none;
 }
 
-.audio-help-li {
+.help-li {
   margin: 20px;
 }
 
-.image-help {
+/* .image-help {
   list-style-type: none;
 }
 
@@ -101,7 +101,7 @@ button.delete {
 
 .video-help-li {
   margin: 20px;
-}
+} */
 
 .drawer-toggle-div {
   display: none;

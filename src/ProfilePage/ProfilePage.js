@@ -16,7 +16,9 @@ class ProfilePage extends Component {
     this.state = {
       imageHelp: false,
       audioHelp: false,
-      videoHelp: false
+      videoHelp: false,
+      showHelp: false,
+      linkHelp: false
     };
   }
 
@@ -118,6 +120,7 @@ class ProfilePage extends Component {
                 required
                 name="bandImage"
                 id="bandImage"
+                defaultValue={this.context.userProfile.image}
               />
             </p>
 
@@ -133,15 +136,18 @@ class ProfilePage extends Component {
               </a>
             </p>
 
-            <div className={`show-image-help-${this.state.imageHelp}`}>
-              <ul className="image-help">
-                <li className="image-help-li">
+            <div className={`show-help-${this.state.imageHelp}`}>
+              <ul className="help">
+                <li className="help-li">
                   Enter in an image URL (jpg or png) to submit
                 </li>
-                <li className="image-help-li">
+                <li className="help-li">
                   The image you submit will be the cover image of your website
                 </li>
-                <li className="image-help-li">
+                <li className="help-li">
+                  You may replace your initial image with a new image
+                </li>
+                <li className="help-li">
                   Clicking on this image will link to your "Listen" page
                 </li>
               </ul>
@@ -201,18 +207,18 @@ class ProfilePage extends Component {
               </a>
             </p>
 
-            <div className={`show-video-help-${this.state.videoHelp}`}>
-              <ul className="video-help">
-                <li className="video-help-li">
+            <div className={`show-help-${this.state.videoHelp}`}>
+              <ul className="help">
+                <li className="help-li">
                   Go to your YouTube video you want to link
                 </li>
-                <li className="video-help-li">Click on the "Share" link</li>
-                <li className="video-help-li">Click on "Embed"</li>
-                <li className="video-help-li">
+                <li className="help-li">Click on the "Share" link</li>
+                <li className="help-li">Click on "Embed"</li>
+                <li className="help-li">
                   Copy the "src" portion of the embed link -
                   src="https://bandcamp.com/EmbeddedPlayer/track=77723839/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
                 </li>
-                <li className="video-help-li">
+                <li className="help-li">
                   Paste this portion of the link (delete "src" and the quotes)
                   within the form above and click "Submit"
                 </li>
@@ -289,25 +295,23 @@ class ProfilePage extends Component {
               </a>
             </p>
 
-            <div className={`show-audio-help-${this.state.audioHelp}`}>
-              <ul className="audio-help">
-                <li className="audio-help-li">Go to your Bandcamp account</li>
-                <li className="audio-help-li">
+            <div className={`show-help-${this.state.audioHelp}`}>
+              <ul className="help">
+                <li className="help-li">Go to your Bandcamp account</li>
+                <li className="help-li">
                   Click on track or album that you want to link
                 </li>
-                <li className="audio-help-li">
-                  Click on the "Share/Embed" link
-                </li>
-                <li className="audio-help-li">Click on "Embed this track"</li>
-                <li className="audio-help-li">
+                <li className="help-li">Click on the "Share/Embed" link</li>
+                <li className="help-li">Click on "Embed this track"</li>
+                <li className="help-li">
                   Within the "Select a style" prompt, click on the largest style
                   option
                 </li>
-                <li className="audio-help-li">
+                <li className="help-li">
                   Copy the "src" portion of the embed link -
                   src="https://bandcamp.com/EmbeddedPlayer/track=77723839/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/"
                 </li>
-                <li className="audio-help-li">
+                <li className="help-li">
                   Paste this portion of the link (delete "src" and the quotes)
                   within the form above and click "Submit"
                 </li>
@@ -380,6 +384,33 @@ class ProfilePage extends Component {
               aria-label="venue city"
             />
             <p>
+              <a
+                href="/showhelp"
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ showHelp: !this.state.showHelp });
+                }}
+              >
+                {this.state.showHelp ? 'Hide Help' : 'Show Help'}
+              </a>
+            </p>
+
+            <div className={`show-help-${this.state.showHelp}`}>
+              <ul className="help">
+                <li className="help-li">Enter upcoming shows</li>
+                <li className="help-li">
+                  You may enter in a date (following the format shown) or pick a
+                  date from the calender (down arrow on the right side of the
+                  entry form)
+                </li>
+                <li className="help-li">
+                  Enter in venue name and venue city,state (following the format
+                  shown)
+                </li>
+              </ul>
+            </div>
+
+            <p>
               <button className="submit-button" type="submit">
                 Submit
               </button>
@@ -421,7 +452,6 @@ class ProfilePage extends Component {
             className="band-form"
             ref={form => (this.form = form)}
             onSubmit={e => this.linksHandleSubmit(e)}
-            // onSubmit={this.linksHandleSubmit}
           >
             <p>
               <label htmlFor="bandSocial-Facebook">Facebook: </label>
@@ -430,6 +460,7 @@ class ProfilePage extends Component {
                 type="text"
                 name="facebook"
                 id="bandSocial-Facebook"
+                defaultValue={this.context.userProfile.facebook}
               />
             </p>
 
@@ -440,6 +471,7 @@ class ProfilePage extends Component {
                 type="text"
                 name="twitter"
                 id="bandSocial-Twitter"
+                defaultValue={this.context.userProfile.twitter}
               />
             </p>
 
@@ -450,6 +482,7 @@ class ProfilePage extends Component {
                 type="text"
                 name="instagram"
                 id="bandSocial-Instagram"
+                defaultValue={this.context.userProfile.instagram}
               />
             </p>
 
@@ -460,6 +493,7 @@ class ProfilePage extends Component {
                 type="text"
                 name="youtube"
                 id="bandSocial-YouTube"
+                defaultValue={this.context.userProfile.youtube}
               />
             </p>
 
@@ -470,6 +504,7 @@ class ProfilePage extends Component {
                 type="text"
                 name="soundcloud"
                 id="bandSocial-SoundCloud"
+                defaultValue={this.context.userProfile.soundcloud}
               />
             </p>
 
@@ -496,6 +531,37 @@ class ProfilePage extends Component {
                 )}
               />
             </p>
+
+            <p>
+              <a
+                href="/linkhelp"
+                onClick={e => {
+                  e.preventDefault();
+                  this.setState({ linkHelp: !this.state.linkHelp });
+                }}
+              >
+                {this.state.linkHelp ? 'Hide Help' : 'Show Help'}
+              </a>
+            </p>
+
+            <div className={`show-help-${this.state.linkHelp}`}>
+              <ul className="help">
+                <li className="help-li">
+                  Enter in social media links and a contact email
+                </li>
+                <li className="help-li">
+                  You may leave specific links and contact email empty
+                </li>
+                <li className="help-li">
+                  You may replace your initial links and contact email with new
+                  links/email or erase links within the form to delete links
+                </li>
+                <li className="help-li">
+                  Links will be displayed as icons on the bottom of every page
+                </li>
+              </ul>
+            </div>
+
             <button className="submit-button" type="submit">
               Submit
             </button>
