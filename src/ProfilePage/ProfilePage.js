@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Contexts/Context';
 import './ProfilePage.css';
+import { withRouter } from 'react-router';
 
 class ProfilePage extends Component {
   static contextType = Context;
@@ -583,4 +584,4 @@ class ProfilePage extends Component {
   }
 }
 
-export default ProfilePage;
+export default withRouter(ProfilePage);
