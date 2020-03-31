@@ -101,7 +101,6 @@ class ProfilePage extends Component {
   };
 
   render() {
-    // const { link } = this.context;
     return (
       <div className="profilePage">
         <section className="image-profilePage">

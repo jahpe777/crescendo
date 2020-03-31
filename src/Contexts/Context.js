@@ -7,8 +7,6 @@ export default React.createContext({
 
   error: null,
 
-  // authToken: false,
-
   users: [],
 
   videos: [],
@@ -25,16 +23,6 @@ export default React.createContext({
     bandcamp: '',
     contact_email: ''
   },
-
-  // link: {
-  //   facebook: '',
-  //   twitter: '',
-  //   instagram: '',
-  //   youtube: '',
-  //   soundcloud: '',
-  //   bandcamp: '',
-  //   contact_email: ''
-  // },
 
   shows: [],
 

@@ -32,8 +32,6 @@ class App extends Component {
 
       error: null,
 
-      // authToken: false,
-
       users: [],
 
       videos: [],
@@ -50,16 +48,6 @@ class App extends Component {
         bandcamp: '',
         contact_email: ''
       },
-
-      // link: {
-      //   facebook: '',
-      //   twitter: '',
-      //   instagram: '',
-      //   youtube: '',
-      //   soundcloud: '',
-      //   bandcamp: '',
-      //   contact_email: ''
-      // },
 
       shows: [],
 
@@ -250,18 +238,6 @@ class App extends Component {
           .catch(res => {
             this.setState({ error: res.error });
           });
-
-        // const newUser = {
-        //   email: e.target.email.value,
-        //   password: e.target.password.value
-        // };
-
-        // this.addNewUser(newUser);
-        // e.target.reset();
-
-        // window.localStorage.setItem('authToken', true);
-        // this.setState({ authToken: true });
-        // cb();
       },
 
       login: (e, cb) => {
