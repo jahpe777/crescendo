@@ -30,6 +30,8 @@ class App extends Component {
         push: () => {}
       },
 
+      authToken: false,
+
       error: null,
 
       users: [],
@@ -245,7 +247,7 @@ class App extends Component {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
-        fetch('http://localhost:7000/api/auth/login', {
+        fetch(`${config.API_ENDPOINT}/api/auth/login`, {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
@@ -301,7 +303,6 @@ class App extends Component {
       `${config.API_ENDPOINT}/api/songs`,
       `${config.API_ENDPOINT}/api/videos`
     ];
-
     Promise.all(
       urls.map(url =>
         fetch(url, {
