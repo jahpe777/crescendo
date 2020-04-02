@@ -313,9 +313,11 @@ class App extends Component {
           }
         })
           .then(res => {
+            console.log(res);
             if (!res.ok) {
               return res.json().then(error => Promise.reject(error));
             }
+            // if(res.status === 401) {};
             return res.json();
           })
           .then(data => {
