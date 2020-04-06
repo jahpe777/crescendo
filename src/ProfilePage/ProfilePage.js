@@ -168,7 +168,7 @@ class ProfilePage extends Component {
                     <img
                       className="image-homePage"
                       src={this.context.userProfile.image}
-                      alt="image-band"
+                      alt="The Band"
                     />
                   ) : (
                     ''

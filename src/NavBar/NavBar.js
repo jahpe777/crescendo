@@ -9,10 +9,6 @@ import Context from '../Contexts/Context';
 class NavBar extends React.Component {
   static contextType = Context;
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <section className="navbar">
@@ -26,8 +22,8 @@ class NavBar extends React.Component {
         <nav>
           {this.context.authToken ? (
             <ul className="navlinks">
-              {Object.keys(this.context.links).map(url => (
-                <li className="nav-li">
+              {Object.keys(this.context.links).map((url, i) => (
+                <li key={i} className="nav-li">
                   <Link to={`/${url}`}>{this.context.links[url]}</Link>
                 </li>
               ))}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import uuidv4 from 'uuid/v4';
 
 import './App.css';
 
@@ -293,47 +292,54 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      authToken: window.localStorage.getItem('authToken')
-    });
-
-    let urls = [
-      `${config.API_ENDPOINT}/api/users/loggedin`,
-      `${config.API_ENDPOINT}/api/shows`,
-      `${config.API_ENDPOINT}/api/songs`,
-      `${config.API_ENDPOINT}/api/videos`
-    ];
-    Promise.all(
-      urls.map(url =>
-        fetch(url, {
-          method: 'GET',
-          headers: {
-            'content-type': 'application/json',
-            Authorization: `Bearer ${window.localStorage.getItem('authToken')}`
-          }
-        })
-          .then(res => {
-            if (!res.ok) {
-              return res.json().then(error => Promise.reject(error));
-            }
-            // if(res.status === 401) {};
-            return res.json();
-          })
-          .then(data => {
-            return data;
-          })
-          .catch(error => {
-            this.setState({ error });
-          })
-      )
-    ).then(data => {
-      this.setState({
-        userProfile: data[0],
-        shows: data[1],
-        songs: data[2],
-        videos: data[3]
-      });
-    });
+    this.setState(
+      {
+        authToken: window.localStorage.getItem('authToken')
+      },
+      () => {
+        if (this.state.authToken) {
+          let urls = [
+            `${config.API_ENDPOINT}/api/users/loggedin`,
+            `${config.API_ENDPOINT}/api/shows`,
+            `${config.API_ENDPOINT}/api/songs`,
+            `${config.API_ENDPOINT}/api/videos`
+          ];
+          Promise.all(
+            urls.map(url =>
+              fetch(url, {
+                method: 'GET',
+                headers: {
+                  'content-type': 'application/json',
+                  Authorization: `Bearer ${window.localStorage.getItem(
+                    'authToken'
+                  )}`
+                }
+              })
+                .then(res => {
+                  if (!res.ok) {
+                    return res.json().then(error => Promise.reject(error));
+                  }
+                  // if(res.status === 401) {};
+                  return res.json();
+                })
+                .then(data => {
+                  return data;
+                })
+                .catch(error => {
+                  this.setState({ error });
+                })
+            )
+          ).then(data => {
+            this.setState({
+              userProfile: data[0],
+              shows: data[1],
+              songs: data[2],
+              videos: data[3]
+            });
+          });
+        }
+      }
+    );
   }
 
   render() {

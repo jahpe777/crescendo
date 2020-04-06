@@ -28,6 +28,11 @@ class AccountPage extends Component {
               this.context.signUp(e, () => this.props.history.push('/login'))
             }
           >
+            {this.context.error ? (
+              <p className="error">{this.context.error}</p>
+            ) : (
+              ''
+            )}
             <p>
               <label htmlFor="account">Email: </label>
               <input
