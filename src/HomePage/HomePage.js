@@ -15,7 +15,7 @@ class HomePage extends Component {
               <img
                 className="image-homePage"
                 src={this.context.userProfile.image}
-                alt="The Band"
+                alt="user-cover"
               />
             </div>
           </Link>
