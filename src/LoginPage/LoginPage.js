@@ -21,6 +21,16 @@ class LoginPage extends Component {
             </p>
           </div>
 
+          <div>
+            <h3>Demo Account:</h3>
+            <p>
+              <strong>Username:</strong> testing2@gmail.com
+            </p>
+            <p>
+              <strong>Password:</strong> Testing1234!
+            </p>
+          </div>
+
           <form
             className="account-form"
             ref={form => (this.form = form)}
