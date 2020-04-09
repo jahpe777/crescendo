@@ -30,3 +30,11 @@
 .toggle-button-close {
   font-size: 70px;
 }
+
+@media screen and (max-width: 415px) {
+  .toggle-button {
+    margin-top: 15px;
+    margin-left: 45px;
+    transform: scale(0.8);
+  }
+}

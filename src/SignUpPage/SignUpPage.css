@@ -1,13 +1,24 @@
 .mailing {
-    margin: 20px;
+  margin: 20px;
 }
 
 button {
-    margin: 50px;
-    width: 100px;
-    height: 30px;
-    font-size: 20px;
+  margin: 50px;
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
 }
 
-    
-   
+.signup-button {
+  border-radius: 50px;
+  background-color: white;
+  color: blue;
+  cursor: pointer;
+  transform: scale(1.5);
+  font-size: 15px;
+}
+
+button.signup-button:hover {
+  box-shadow: 10px 10px grey;
+  transition: 0.3s;
+}

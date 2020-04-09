@@ -106,7 +106,7 @@ class ProfilePage extends Component {
         <section className="image-profilePage">
           <h1 className="profile">Profile</h1>
 
-          <h3>Submit an image of your music project</h3>
+          <h3>Submit a cover image for your music project</h3>
           <form
             className="band-form"
             ref={form => (this.form = form)}
@@ -124,8 +124,9 @@ class ProfilePage extends Component {
               />
             </p>
 
-            <p>
+            <p className="show-hide-help">
               <a
+                className="show-hide-help-a"
                 href="/imagehelp"
                 onClick={e => {
                   e.preventDefault();
@@ -195,8 +196,9 @@ class ProfilePage extends Component {
               />
             </p>
 
-            <p>
+            <p className="show-hide-help">
               <a
+                className="show-hide-help-a"
                 href="/videohelp"
                 onClick={e => {
                   e.preventDefault();
@@ -283,8 +285,9 @@ class ProfilePage extends Component {
               />
             </p>
 
-            <p>
+            <p className="show-hide-help">
               <a
+                className="show-hide-help-a"
                 href="/audiohelp"
                 onClick={e => {
                   e.preventDefault();
@@ -383,8 +386,9 @@ class ProfilePage extends Component {
               placeholder="Venue City, State (ex. Los Angeles, CA)"
               aria-label="venue city"
             />
-            <p>
+            <p className="show-hide-help">
               <a
+                className="show-hide-help-a"
                 href="/showhelp"
                 onClick={e => {
                   e.preventDefault();
@@ -532,8 +536,9 @@ class ProfilePage extends Component {
               />
             </p>
 
-            <p>
+            <p className="show-hide-help">
               <a
+                className="show-hide-help-a"
                 href="/linkhelp"
                 onClick={e => {
                   e.preventDefault();
@@ -572,7 +577,7 @@ class ProfilePage extends Component {
               <h3>Click below to go to your home page</h3>
               <Link to="/home" type="submit">
                 <button className="bandHome-button" type="submit">
-                  View your website!
+                  View your website
                 </button>
               </Link>
             </section>

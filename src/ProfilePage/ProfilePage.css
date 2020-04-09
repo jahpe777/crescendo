@@ -1,6 +1,6 @@
 .profile {
   font-size: 60px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 h2 {
@@ -23,7 +23,7 @@ input {
   height: 30px;
   width: 210px;
   font-size: 20px;
-  color: skyblue;
+  color: blue;
 }
 
 input::-webkit-input-placeholder {
@@ -35,24 +35,53 @@ input::-webkit-input-placeholder {
   width: 70%;
   margin: 0 auto;
   text-align: center;
-  margin: 10px auto 20px;
+  margin: 20px auto 20px;
 }
 
 button.bandHome-button {
   margin: 0px;
   width: 300px;
   height: 100px;
+  border-radius: 50px;
+  background-color: white;
+  color: blue;
+  transform: scale(0.8);
+  font-size: 30px;
+}
+
+button.bandHome-button:hover {
+  box-shadow: 10px 10px grey;
+  transition: 0.3s;
 }
 
 button.submit-button {
   margin-top: 5px;
+  margin-bottom: 0px;
   cursor: pointer;
+  border-radius: 50px;
+  background-color: white;
+  color: blue;
+  transform: scale(1.5);
+  font-size: 15px;
+}
+
+button.submit-button:hover {
+  box-shadow: 10px 10px grey;
+  transition: 0.3s;
 }
 
 button.delete {
   margin: 0px;
   margin-top: 5px;
   cursor: pointer;
+  border-radius: 50px;
+  background-color: white;
+  color: blue;
+}
+
+button.delete:hover {
+  box-shadow: 10px 10px grey;
+  transition: 0.3s;
 }
 
 .show-help-false {
@@ -69,6 +98,27 @@ button.delete {
 
 .help-li {
   margin: 20px;
+}
+
+.show-hide-help {
+  margin-bottom: 20px;
+}
+
+.show-hide-help-a {
+  color: red;
+}
+
+.show-hide-help-a:hover {
+  color: blue;
+  transition: 0.5s;
+}
+
+.image-homePage {
+  margin: 0px;
+}
+
+.image-showspage {
+  padding-top: 20px;
 }
 
 /* .image-help {

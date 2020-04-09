@@ -44,6 +44,7 @@ class LoginPage extends Component {
             <p>
               <label htmlFor="account">Email: </label>
               <input
+                className="email"
                 placeholder="john@gmail.com"
                 type="email"
                 required
@@ -54,6 +55,7 @@ class LoginPage extends Component {
             <p>
               <label htmlFor="account">Password: </label>
               <input
+                className="password"
                 placeholder="password"
                 type="password"
                 required
