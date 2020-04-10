@@ -8,7 +8,7 @@ Crescendo is a fully responsive, full stack React app which gives musical artist
 
 If you don't wish to create an account, and just play around, there are demo user credentials provided at the login page.
 
-This app incorporates secure authentication and authorization.
+This app incorporates secure authentication and authorization practices.
 
 ## Technologies Used
 
