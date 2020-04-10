@@ -12,7 +12,7 @@ This app incorporates secure authentication and authorization.
 
 ## Technologies Used
 
-JavaScript / React / CSS / Node.js / Express / PostreSQL (This repository is for the front end Javascript/React application and associted style sheets. Please see my 'crescendo-api' repository for the server files.
+JavaScript / React / CSS / Node.js / Express / PostreSQL (This repository is for the front end Javascript/React application and associted style sheets. Please see my 'crescendo-api' repository for the server files).
 
 The Crescendo app uses React and is built with Zeit. It uses context to control state.
 
@@ -22,17 +22,9 @@ The Crescendo app uses React and is built with Zeit. It uses context to control 
 
 ![image](public/images/screenshots/landing.png)
 
-### Registration Page:
-
-![image](public/images/screenshots/registration.png)
-
 ### Login Page:
 
 ![image](public/images/screenshots/login.png)
-
-### Profile Page:
-
-![image](public/images/screenshots/profile.png)
 
 ### Home Page:
 
@@ -49,7 +41,3 @@ The Crescendo app uses React and is built with Zeit. It uses context to control 
 ### Shows Page:
 
 ![image](public/images/screenshots/shows.png)
-
-### Mailing Page:
-
-![image](public/images/screenshots/mailing.png)

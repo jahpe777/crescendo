@@ -14,6 +14,7 @@ class ListenPage extends Component {
               {this.context.songs.map(song => (
                 <div key={song.id}>
                   <iframe
+                    className="songs"
                     title="bandcamp alum"
                     border="0"
                     width="350px"

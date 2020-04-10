@@ -335,6 +335,7 @@ class ProfilePage extends Component {
                   {this.context.songs.map(song => (
                     <div key={song.id}>
                       <iframe
+                        className="songs"
                         title="bandcamp alum"
                         border="0"
                         width="350px"
@@ -451,7 +452,9 @@ class ProfilePage extends Component {
             )}
           </Context.Consumer>
 
-          <h3>Submit social media links for your music project</h3>
+          <h3 className="submit-social">
+            Submit social media links for your music project
+          </h3>
           <form
             className="band-form"
             ref={form => (this.form = form)}

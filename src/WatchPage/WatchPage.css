@@ -2,6 +2,11 @@ section {
   margin-bottom: 20px;
 }
 
+.videos {
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
 @media screen and (max-width: 415px) {
   section {
     padding: 20px;
