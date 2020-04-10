@@ -252,7 +252,7 @@ class ProfilePage extends Component {
                       ></iframe>
                       <div>
                         <button
-                          className="delete"
+                          className="delete-video"
                           type="button"
                           onClick={e => this.videosClickDelete(e, video.id)}
                         >
@@ -427,7 +427,7 @@ class ProfilePage extends Component {
                 <section className="image-showspage">
                   {this.context.shows.map(show => (
                     <div>
-                      <div key={show.id}>
+                      <div className="shows-render" key={show.id}>
                         <h3>{show.venue}</h3>
                         <h3>{show.date}</h3>
                         <h3>{show.city}</h3>

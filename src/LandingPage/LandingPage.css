@@ -7,10 +7,12 @@ div {
 
 .landing-create {
   font-size: 100px;
+  color: blue;
 }
 
 .landing-explore {
   margin: 20px;
+  color: purple;
 }
 
 .landing-button {

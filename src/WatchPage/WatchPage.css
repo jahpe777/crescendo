@@ -1,54 +1,53 @@
 section {
-    padding: 50px;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 415px) {
-    section {
-        padding: 20px;
-    }
+  section {
+    padding: 20px;
+  }
 
-    .videos {
-        width: 90%;
-    }
+  .videos {
+    width: 90%;
+  }
 }
 
 @media screen and (min-width: 415px) and (max-width: 1000px) {
-    section {
-        padding: 30px;
-    }
+  section {
+    padding: 30px;
+  }
 
-    .videos {
-        width: 90%;
-    }
+  .videos {
+    width: 90%;
+  }
 }
 
-
 @media screen and (min-width: 1000px) and (max-width: 1200px) {
-    section {
-        padding: 40px;
-    }
+  section {
+    padding: 40px;
+  }
 
-    .videos {
-        width: 80%;
-    }
+  .videos {
+    width: 80%;
+  }
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1500px) {
-    section {
-        padding: 50px;
-    }
+  section {
+    padding: 50px;
+  }
 
-    .videos {
-        width: 65%;
-    }
+  .videos {
+    width: 65%;
+  }
 }
 
 @media screen and (min-width: 1500px) and (max-width: 1670px) {
-    section {
-        padding: 50px;
-    }
+  section {
+    padding: 50px;
+  }
 
-    .videos {
-        width: 60%;
-    }
+  .videos {
+    width: 60%;
+  }
 }

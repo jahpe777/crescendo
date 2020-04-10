@@ -25,6 +25,15 @@ nav {
   font-size: 20px;
 }
 
+.navlinks-a {
+  color: black;
+}
+
+.navlinks-a:hover {
+  color: blue;
+  transition: 0.3s;
+}
+
 .nav-li {
   display: inline;
   padding: 20px;
@@ -62,6 +71,15 @@ button.nav-button:hover {
   width: 40px;
 }
 
+.crescendo-home-a {
+  color: blue;
+}
+
+.crescendo-home-a:hover {
+  color: purple;
+  transition: 0.3s;
+}
+
 @media screen and (min-width: 415px) and (max-width: 1050px) {
   .nav-li {
     padding: 15px;
@@ -75,15 +93,21 @@ button.nav-button:hover {
   }
   .nav-li {
     padding: 10px;
+    font-size: 17px;
   }
 
   .nav-button {
     width: 100px;
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
   h1 {
     font-size: 35px;
+  }
+
+  h1.profile {
+    font-size: 35px;
+    margin-bottom: 30px;
   }
 
   a.login-link {

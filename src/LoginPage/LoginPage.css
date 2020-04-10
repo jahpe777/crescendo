@@ -5,3 +5,26 @@
 .password {
   width: 160px;
 }
+
+.account-button {
+  border-radius: 50px;
+  background-color: white;
+  color: blue;
+  cursor: pointer;
+  transform: scale(1.5);
+  font-size: 15px;
+}
+
+.account-button:hover {
+  box-shadow: 10px 10px grey;
+  transition: 0.3s;
+}
+
+a.create-account {
+  color: blue;
+}
+
+a.create-account:hover {
+  color: purple;
+  transition: 0.3s;
+}

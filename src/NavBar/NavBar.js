@@ -17,14 +17,18 @@ class NavBar extends React.Component {
         </div>
 
         <h1 className="crescendo-home">
-          <Link to="/">Crescendo</Link>
+          <Link className="crescendo-home-a" to="/">
+            Crescendo
+          </Link>
         </h1>
         <nav>
           {this.context.authToken ? (
             <ul className="navlinks">
               {Object.keys(this.context.links).map((url, i) => (
                 <li key={i} className="nav-li">
-                  <Link to={`/${url}`}>{this.context.links[url]}</Link>
+                  <Link className="navlinks-a" to={`/${url}`}>
+                    {this.context.links[url]}
+                  </Link>
                 </li>
               ))}
             </ul>

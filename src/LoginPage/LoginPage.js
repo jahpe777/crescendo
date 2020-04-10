@@ -14,7 +14,7 @@ class LoginPage extends Component {
             <h1 className="account-create">Log In</h1>
             <p className="account-explore">
               Don't have an account?
-              <Link to="/account" type="submit">
+              <Link className="create-account" to="/account" type="submit">
                 {' '}
                 Create account
               </Link>
