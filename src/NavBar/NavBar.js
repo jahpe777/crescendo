@@ -31,6 +31,14 @@ class NavBar extends React.Component {
                   </Link>
                 </li>
               ))}
+              <li className="nav-li">
+                <Link
+                  className="navlinks-a"
+                  to={`/site/${this.context.userProfile.band_slug}`}
+                >
+                  View Site
+                </Link>
+              </li>
             </ul>
           ) : (
             ''

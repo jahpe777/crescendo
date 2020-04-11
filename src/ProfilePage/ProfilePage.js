@@ -427,8 +427,8 @@ class ProfilePage extends Component {
               <div className="showspage">
                 <section className="image-showspage">
                   {this.context.shows.map(show => (
-                    <div>
-                      <div className="shows-render" key={show.id}>
+                    <div key={show.id}>
+                      <div className="shows-render">
                         <h3>{show.venue}</h3>
                         <h3>{show.date}</h3>
                         <h3>{show.city}</h3>
@@ -578,7 +578,10 @@ class ProfilePage extends Component {
           <div className="band-home-button">
             <section>
               <h3>Click below to go to your home page</h3>
-              <Link to="/home" type="submit">
+              <Link
+                to={`/site/${this.context.userProfile.band_slug}`}
+                type="submit"
+              >
                 <button className="bandHome-button" type="submit">
                   View your website
                 </button>

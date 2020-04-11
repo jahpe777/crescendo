@@ -34,7 +34,7 @@ class AccountPage extends Component {
               ''
             )}
             <p>
-              <label htmlFor="account">Email: </label>
+              <label htmlFor="email">Email: </label>
               <input
                 placeholder="john@gmail.com"
                 type="email"
@@ -44,7 +44,17 @@ class AccountPage extends Component {
               />
             </p>
             <p>
-              <label htmlFor="account">Password: </label>
+              <label htmlFor="bandName">Band Name: </label>
+              <input
+                placeholder="The Band"
+                type="bandName"
+                required
+                name="bandName"
+                id="bandName"
+              />
+            </p>
+            <p>
+              <label htmlFor="password">Password: </label>
               <input
                 placeholder="password"
                 type="password"

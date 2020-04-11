@@ -7,7 +7,7 @@ import NavBar from './NavBar/NavBar';
 import Footer from './Footer/Footer';
 import AccountPage from './AccountPage/AccountPage';
 import LoginPage from './LoginPage/LoginPage';
-import HomePage from './HomePage/HomePage';
+import BandPage from './BandPage/BandPage';
 import ProfilePage from './ProfilePage/ProfilePage';
 import LandingPage from './LandingPage/LandingPage';
 import WatchPage from './WatchPage/WatchPage';
@@ -15,6 +15,7 @@ import ListenPage from './ListenPage/ListenPage';
 import ShowsPage from './ShowsPage/ShowsPage';
 import SignUpPage from './SignUpPage/SignUpPage';
 import SideDrawer from './SideDrawer/SideDrawer';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 import AuthApiService from './Services/auth-api-service';
 
@@ -57,7 +58,6 @@ class App extends Component {
       sideDrawerOpen: false,
 
       links: {
-        home: 'Home',
         profile: 'Profile',
         watch: 'Watch',
         listen: 'Listen',
@@ -225,11 +225,13 @@ class App extends Component {
         e.preventDefault();
 
         const email = e.target.email.value;
+        const bandName = e.target.bandName.value;
         const password = e.target.password.value;
 
         this.setState({ error: null });
         AuthApiService.postUser({
           user_email: email,
+          band_name: bandName,
           password
         })
           .then(user => {
@@ -354,15 +356,17 @@ class App extends Component {
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/account" component={AccountPage} />
             <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/home" component={HomePage} />
-            <Route exact path="/profile" component={ProfilePage} />
-            <Route exact path="/watch" component={WatchPage} />
-            <Route exact path="/listen" component={ListenPage} />
-            <Route exact path="/shows" component={ShowsPage} />
-            <Route exact path="/signup" component={SignUpPage} />
+
+            <PrivateRoute exact path="/profile" component={ProfilePage} />
+            <PrivateRoute exact path="/watch" component={WatchPage} />
+            <PrivateRoute exact path="/listen" component={ListenPage} />
+            <PrivateRoute exact path="/shows" component={ShowsPage} />
+            <PrivateRoute exact path="/signup" component={SignUpPage} />
+
+            <Route path="/site/:bandslug" component={BandPage} />
           </main>
           <footer>
-            <Route path="/" component={Footer} />
+            <Route path={/^(?!.*(\/site)).*$/} component={Footer} />
           </footer>
         </div>
       </Context.Provider>
