@@ -46,7 +46,7 @@ class AccountPage extends Component {
             <p>
               <label htmlFor="bandName">Band Name: </label>
               <input
-                placeholder="The Band"
+                placeholder="The Beatles"
                 type="bandName"
                 required
                 name="bandName"

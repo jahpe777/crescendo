@@ -6,6 +6,9 @@ class WatchPage extends Component {
   static contextType = Context;
 
   render() {
+    // const watchVideos = this.props.watchVideos
+    //   ? this.props.watchVideos
+    //   : this.context.videos;
     return (
       <Context.Consumer>
         {value => (

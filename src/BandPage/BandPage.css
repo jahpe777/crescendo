@@ -1,5 +1,9 @@
-.image-homePage {
-    margin: 30px auto;
-    width: 100%;
-    max-width: 1000px;
+.band-name {
+  color: blue;
+}
+
+.image-bandPage {
+  margin: 30px auto;
+  width: 100%;
+  max-width: 1000px;
 }

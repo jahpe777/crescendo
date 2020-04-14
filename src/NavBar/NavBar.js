@@ -10,6 +10,18 @@ class NavBar extends React.Component {
   static contextType = Context;
 
   render() {
+    let signinButton;
+
+    if (this.props.location.pathname !== '/login') {
+      signinButton = (
+        <Link className="login-link" to="/login">
+          <button className="nav-button" type="submit">
+            <li className="nav-li">Sign In</li>
+          </button>
+        </Link>
+      );
+    }
+
     return (
       <section className="navbar">
         <div className="drawer-toggle-div">
@@ -56,11 +68,7 @@ class NavBar extends React.Component {
               </button>
             </a>
           ) : (
-            <Link className="login-link" to="/login">
-              <button className="nav-button" type="submit">
-                <li className="nav-li">Sign In</li>
-              </button>
-            </Link>
+            signinButton
           )}
         </nav>
       </section>

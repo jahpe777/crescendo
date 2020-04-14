@@ -143,7 +143,9 @@ button.delete-video:hover {
 }
 
 .image-homePage {
-  margin: 0px;
+  margin: 30px auto;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .image-showspage {

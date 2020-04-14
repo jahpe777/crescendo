@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './SignUpPage.css';
 import Context from '../Contexts/Context';
+import './SignUpPage.css';
 
 class SignUpPage extends Component {
   static contextType = Context;

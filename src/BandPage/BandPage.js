@@ -3,6 +3,10 @@ import './BandPage.css';
 import Context from '../Contexts/Context';
 import config from '../config';
 import Footer from '../Footer/Footer';
+import WatchPage from '../WatchPage/WatchPage';
+import ListenPage from '../ListenPage/ListenPage';
+import ShowsPage from '../ShowsPage/ShowsPage';
+import SignUpPage from '../SignUpPage/SignUpPage';
 
 class BandPage extends Component {
   static contextType = Context;
@@ -33,17 +37,21 @@ class BandPage extends Component {
       <>
         <div className="bandpage">
           <section>
-            <h2>{this.state.band.band_name}</h2>
+            <h2 className="band-name">{this.state.band.band_name}</h2>
 
             <div>
               <img
-                className="image-bandpage"
+                className="image-bandPage"
                 src={this.state.band.image}
                 alt="user-cover"
               />
             </div>
           </section>
         </div>
+        <WatchPage profile={this.state.band} />
+        <ListenPage profile={this.state.band} />
+        <ShowsPage profile={this.state.band} />
+        <SignUpPage profile={this.state.band} />
         <Footer profile={this.state.band} />
       </>
     ) : (

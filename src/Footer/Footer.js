@@ -14,10 +14,11 @@ class Footer extends Component {
       'soundcloud',
       'bandcamp'
     ];
+
     const profile = this.props.profile
       ? this.props.profile
       : this.context.userProfile;
-    console.log(profile, 'profile');
+
     return (
       <section className="footer">
         <ul className="links">
