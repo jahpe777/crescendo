@@ -7,8 +7,11 @@ class SignUpPage extends Component {
 
   emailsHandleSubmit = e => {
     e.preventDefault();
-    const newEmail = { email: e.target.email.value };
-    this.context.addNewEmail(newEmail);
+    const newEmail = e.target.email.value;
+    const band_id = this.props.profile
+      ? this.props.profile.id
+      : this.context.userProfile.id;
+    this.context.addNewEmail(newEmail, band_id);
     this.form.reset();
     alert('Thanks for signing up!');
   };

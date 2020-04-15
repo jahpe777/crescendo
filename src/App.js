@@ -84,7 +84,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/users`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
           },
           method: 'PATCH',
           body: JSON.stringify(newContent)
@@ -102,7 +102,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/videos`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
           },
           method: 'POST',
           body: JSON.stringify(video)
@@ -118,7 +118,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/videos/${videoId}`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
           },
           method: 'DELETE',
           body: JSON.stringify(videoId)
@@ -138,7 +138,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/songs`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
           },
           method: 'POST',
           body: JSON.stringify(song)
@@ -154,7 +154,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/songs/${songId}`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
           },
           method: 'DELETE',
           body: JSON.stringify(songId)
@@ -174,7 +174,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/shows`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
           },
           method: 'POST',
           body: JSON.stringify(show)
@@ -190,7 +190,7 @@ class App extends Component {
         fetch(`${config.API_ENDPOINT}/api/shows/${showId}`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
           },
           method: 'DELETE',
           body: JSON.stringify(showId)
@@ -206,14 +206,14 @@ class App extends Component {
           });
       },
 
-      addNewEmail: email => {
+      addNewEmail: (email, band_id) => {
         fetch(`${config.API_ENDPOINT}/api/emails`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
           },
           method: 'POST',
-          body: JSON.stringify(email)
+          body: JSON.stringify({ email, band_id })
         })
           .then(res => {
             this.setState({ emails: [...this.state.emails, res] });
@@ -257,34 +257,37 @@ class App extends Component {
         })
           .then(res => res.json())
           .then(resJson => {
-            window.localStorage.setItem('authToken', resJson.authToken);
+            window.sessionStorage.setItem('authToken', resJson.authToken);
             this.setState({ authToken: resJson.authToken });
             cb();
           });
       },
 
-      logout: (e, cb) => {
-        e.preventDefault();
-        window.localStorage.removeItem('authToken');
-        this.setState({
-          authToken: false,
-          shows: [],
-          emails: [],
-          songs: [],
-          videos: [],
-          users: [],
-          userProfile: {
-            image: '',
-            facebook: '',
-            twitter: '',
-            instagram: '',
-            youtube: '',
-            soundcloud: '',
-            bandcamp: '',
-            contact_email: ''
+      logout: () => {
+        window.sessionStorage.removeItem('authToken');
+        this.setState(
+          {
+            authToken: false,
+            shows: [],
+            emails: [],
+            songs: [],
+            videos: [],
+            users: [],
+            userProfile: {
+              image: '',
+              facebook: '',
+              twitter: '',
+              instagram: '',
+              youtube: '',
+              soundcloud: '',
+              bandcamp: '',
+              contact_email: ''
+            }
+          },
+          () => {
+            window.location.reload();
           }
-        });
-        cb();
+        );
       },
 
       drawerClickHandler: () => {
@@ -296,7 +299,7 @@ class App extends Component {
   componentDidMount() {
     this.setState(
       {
-        authToken: window.localStorage.getItem('authToken')
+        authToken: window.sessionStorage.getItem('authToken')
       },
       () => {
         if (this.state.authToken) {
@@ -312,16 +315,18 @@ class App extends Component {
                 method: 'GET',
                 headers: {
                   'content-type': 'application/json',
-                  Authorization: `Bearer ${window.localStorage.getItem(
+                  Authorization: `Bearer ${window.sessionStorage.getItem(
                     'authToken'
                   )}`
                 }
               })
                 .then(res => {
                   if (!res.ok) {
+                    if (res.status === 401) {
+                      this.state.logout();
+                    }
                     return res.json().then(error => Promise.reject(error));
                   }
-                  // if(res.status === 401) {};
                   return res.json();
                 })
                 .then(data => {
@@ -356,8 +361,8 @@ class App extends Component {
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/account" component={AccountPage} />
             <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/profile" component={ProfilePage} />
 
-            <PrivateRoute exact path="/profile" component={ProfilePage} />
             <PrivateRoute exact path="/watch" component={WatchPage} />
             <PrivateRoute exact path="/listen" component={ListenPage} />
             <PrivateRoute exact path="/shows" component={ShowsPage} />

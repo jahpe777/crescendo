@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BandPage from './BandPage';
+import DrawerToggleButton from './DrawerToggleButton';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -10,6 +10,6 @@ it('renders without crashing', () => {
       push: () => {}
     }
   };
-  ReactDOM.render(<BandPage {...props} />, div);
+  ReactDOM.render(<DrawerToggleButton {...props} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

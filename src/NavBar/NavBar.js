@@ -10,29 +10,21 @@ class NavBar extends React.Component {
   static contextType = Context;
 
   render() {
-    let signinButton;
-
-    if (this.props.location.pathname !== '/login') {
-      signinButton = (
-        <Link className="login-link" to="/login">
-          <button className="nav-button" type="submit">
-            <li className="nav-li">Sign In</li>
-          </button>
-        </Link>
-      );
-    }
-
     return (
       <section className="navbar">
         <div className="drawer-toggle-div">
           <DrawerToggleButton />
         </div>
 
-        <h1 className="crescendo-home">
-          <Link className="crescendo-home-a" to="/">
-            Crescendo
-          </Link>
-        </h1>
+        {this.context.authToken ? (
+          ''
+        ) : (
+          <h1 className="crescendo-home">
+            <Link className="crescendo-home-a" to="/">
+              Crescendo
+            </Link>
+          </h1>
+        )}
         <nav>
           {this.context.authToken ? (
             <ul className="navlinks">
@@ -43,14 +35,18 @@ class NavBar extends React.Component {
                   </Link>
                 </li>
               ))}
-              <li className="nav-li">
-                <Link
-                  className="navlinks-a"
-                  to={`/site/${this.context.userProfile.band_slug}`}
-                >
-                  View Site
-                </Link>
-              </li>
+              {this.context.userProfile ? (
+                <li className="nav-li">
+                  <Link
+                    className="navlinks-a"
+                    to={`/site/${this.context.userProfile.band_slug}`}
+                  >
+                    View Site
+                  </Link>
+                </li>
+              ) : (
+                ''
+              )}
             </ul>
           ) : (
             ''
@@ -59,16 +55,21 @@ class NavBar extends React.Component {
             <a
               className="login-link"
               href="/logout"
-              onClick={e =>
-                this.context.logout(e, () => this.props.history.push('/'))
-              }
+              onClick={e => {
+                e.preventDefault();
+                this.context.logout();
+              }}
             >
               <button className="nav-button" type="submit">
                 <li className="nav-li">Sign Out</li>
               </button>
             </a>
           ) : (
-            signinButton
+            <Link className="login-link" to="/login">
+              <button className="nav-button" type="submit">
+                <li className="nav-li">Sign In</li>
+              </button>
+            </Link>
           )}
         </nav>
       </section>

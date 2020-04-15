@@ -13,8 +13,8 @@ class SideDrawer extends React.Component {
       <>
         <nav className="side-drawer">
           <ul>
-            {Object.keys(this.context.links).map(url => (
-              <li className="nav-li">
+            {Object.keys(this.context.links).map((url, i) => (
+              <li key={i} className="nav-li">
                 <Link
                   to={`/${url}`}
                   onClick={() => this.context.drawerClickHandler()}

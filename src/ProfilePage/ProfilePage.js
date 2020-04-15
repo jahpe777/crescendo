@@ -10,7 +10,7 @@ class ProfilePage extends Component {
   constructor(props) {
     super(props);
 
-    if (!window.localStorage.getItem('authToken')) {
+    if (!window.sessionStorage.getItem('authToken')) {
       this.props.history.push('/');
     }
 
