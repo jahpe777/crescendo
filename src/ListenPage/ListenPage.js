@@ -9,7 +9,7 @@ class ListenPage extends Component {
     const profile = this.props.profile ? this.props.profile : this.context;
     return (
       <div className="listenpage">
-        <section>
+        <section className="listen-section">
           {profile.songs.map(song => (
             <div key={song.id}>
               <iframe

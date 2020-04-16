@@ -371,7 +371,7 @@ class App extends Component {
             <Route path="/site/:bandslug" component={BandPage} />
           </main>
           <footer>
-            <Route path={/^(?!.*(\/site)).*$/} component={Footer} />
+            <Footer />
           </footer>
         </div>
       </Context.Provider>

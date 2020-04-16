@@ -234,39 +234,35 @@ class ProfilePage extends Component {
             </p>
           </form>
 
-          <Context.Consumer>
-            {value => (
-              <div className="watchpage">
-                <section>
-                  {this.context.videos.map(video => (
-                    <div key={video.id}>
-                      <iframe
-                        className="videos"
-                        title="newVideo"
-                        width="46.3%"
-                        height="473"
-                        src={video.video}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
-                      <div>
-                        <button
-                          className="delete-video"
-                          type="button"
-                          onClick={e => this.videosClickDelete(e, video.id)}
-                        >
-                          <i></i>
-                          {''}
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </section>
-              </div>
-            )}
-          </Context.Consumer>
+          <div className="watchpage">
+            <section>
+              {this.context.videos.map(video => (
+                <div key={video.id}>
+                  <iframe
+                    className="videos"
+                    title="newVideo"
+                    width="46.3%"
+                    height="473"
+                    src={video.video}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                  <div>
+                    <button
+                      className="delete-video"
+                      type="button"
+                      onClick={e => this.videosClickDelete(e, video.id)}
+                    >
+                      <i></i>
+                      {''}
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </section>
+          </div>
 
           <h3>Submit Bandcamp embedded links for your music project</h3>
           <form
@@ -328,39 +324,37 @@ class ProfilePage extends Component {
             </p>
           </form>
 
-          <Context.Consumer>
-            {value => (
-              <div className="listenpage">
-                <section>
-                  {this.context.songs.map(song => (
-                    <div key={song.id}>
-                      <iframe
-                        className="songs"
-                        title="bandcamp alum"
-                        border="0"
-                        width="350px"
-                        height="470px"
-                        src={song.song}
-                      ></iframe>
-                      <div>
-                        <button
-                          className="delete"
-                          type="button"
-                          onClick={e => this.songsClickDelete(e, song.id)}
-                        >
-                          <i></i>
-                          {''}
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </section>
-              </div>
-            )}
-          </Context.Consumer>
+          <div className="listenpage">
+            <section className="image-songspage">
+              {this.context.songs.map(song => (
+                <div key={song.id}>
+                  <iframe
+                    className="songs"
+                    title="bandcamp alum"
+                    border="0"
+                    width="350px"
+                    height="470px"
+                    src={song.song}
+                  ></iframe>
+                  <div>
+                    <button
+                      className="delete-song"
+                      type="button"
+                      onClick={e => this.songsClickDelete(e, song.id)}
+                    >
+                      <i></i>
+                      {''}
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </section>
+          </div>
 
-          <h3>Submit your music project's upcoming shows</h3>
+          <h3 className="submit-shows">
+            Submit your music project's upcoming shows
+          </h3>
           <form
             className="band-form"
             ref={form => (this.form = form)}
@@ -422,39 +416,33 @@ class ProfilePage extends Component {
             </p>
           </form>
 
-          <Context.Consumer>
-            {value => (
-              <div className="showspage">
-                <section className="image-showspage">
-                  {this.context.shows.map(show => (
-                    <div key={show.id}>
-                      <div className="shows-render">
-                        <h3>{show.venue}</h3>
-                        <h3>{show.date}</h3>
-                        <h3>{show.city}</h3>
-                        <br />
-                      </div>
-                      <div>
-                        <button
-                          className="delete"
-                          type="button"
-                          onClick={e => this.showsClickDelete(e, show.id)}
-                        >
-                          <i></i>
-                          {''}
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </section>
-              </div>
-            )}
-          </Context.Consumer>
+          <div className="showspage">
+            <section className="image-showspage">
+              {this.context.shows.map(show => (
+                <div key={show.id}>
+                  <div className="shows-render">
+                    <h3>{show.venue}</h3>
+                    <h3>{show.date}</h3>
+                    <h3>{show.city}</h3>
+                    <br />
+                  </div>
+                  <div>
+                    <button
+                      className="delete"
+                      type="button"
+                      onClick={e => this.showsClickDelete(e, show.id)}
+                    >
+                      <i></i>
+                      {''}
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </section>
+          </div>
 
-          <h3 className="submit-social">
-            Submit social media links for your music project
-          </h3>
+          <h3>Submit social media links for your music project</h3>
           <form
             className="band-form"
             ref={form => (this.form = form)}

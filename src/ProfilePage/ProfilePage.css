@@ -71,6 +71,7 @@ button.submit-button:hover {
 }
 
 button.delete {
+  margin: 0px;
   margin-top: 0px;
   cursor: pointer;
   border-radius: 50px;
@@ -79,6 +80,21 @@ button.delete {
 }
 
 button.delete:hover {
+  box-shadow: 10px 10px grey;
+  transition: 0.3s;
+}
+
+button.delete-song {
+  margin-bottom: 50px;
+  margin: 0px;
+  margin-top: 0px;
+  cursor: pointer;
+  border-radius: 50px;
+  background-color: white;
+  color: blue;
+}
+
+button.delete-song:hover {
   box-shadow: 10px 10px grey;
   transition: 0.3s;
 }
@@ -107,10 +123,21 @@ button.delete-video:hover {
 
 .shows-render {
   height: 175px;
+  margin-top: 60px;
 }
 
 .image-showspage {
-  padding-bottom: 20px;
+  padding-bottom: 60px;
+}
+
+.image-songspage {
+  margin: 0px;
+  padding-bottom: 0px;
+}
+
+.submit-shows {
+  margin-top: 0px;
+  margin-bottom: 30px;
 }
 
 .show-help-false {
@@ -175,6 +202,11 @@ button.delete-video:hover {
     font-size: 15px;
   }
 
+  button.delete-song {
+    margin: 0px;
+    font-size: 15px;
+  }
+
   button.delete {
     margin: 0px;
     font-size: 15px;
@@ -185,7 +217,8 @@ button.delete-video:hover {
   }
 
   .shows-render {
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     height: 135px;
   }
 
@@ -195,5 +228,20 @@ button.delete-video:hover {
 
   ul.help {
     padding-left: 0px;
+  }
+
+  h3 {
+    font-size: 25px;
+  }
+
+  .image-showspage {
+    padding-bottom: 20px;
+  }
+
+  @media screen and (max-width: 320px) {
+    .songs {
+      height: 470px;
+      max-width: 100%;
+    }
   }
 }

@@ -1,9 +1,19 @@
+.bandpage {
+  background-color: pink;
+}
+
 .band-name {
   color: blue;
+  font-size: 60px;
 }
 
 .image-bandPage {
   margin: 30px auto;
   width: 100%;
   max-width: 1000px;
+}
+
+.listen-section {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }

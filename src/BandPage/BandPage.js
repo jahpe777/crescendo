@@ -47,12 +47,13 @@ class BandPage extends Component {
               />
             </div>
           </section>
+
+          <WatchPage profile={this.state.band} />
+          <ListenPage profile={this.state.band} />
+          <ShowsPage profile={this.state.band} />
+          <SignUpPage profile={this.state.band} />
+          <Footer profile={this.state.band} />
         </div>
-        <WatchPage profile={this.state.band} />
-        <ListenPage profile={this.state.band} />
-        <ShowsPage profile={this.state.band} />
-        <SignUpPage profile={this.state.band} />
-        <Footer profile={this.state.band} />
       </>
     ) : (
       'Loading...'
