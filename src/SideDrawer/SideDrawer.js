@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import './SideDrawer.css';
 
@@ -9,6 +9,7 @@ class SideDrawer extends React.Component {
   static contextType = Context;
 
   render() {
+    let bandslug = this.props.bandslug;
     return (
       <>
         <nav className="side-drawer">
@@ -23,6 +24,15 @@ class SideDrawer extends React.Component {
                 </Link>
               </li>
             ))}
+
+            <li className="nav-li">
+              <Link
+                to={`/site/${bandslug}`}
+                onClick={() => this.context.drawerClickHandler()}
+              >
+                View My Site
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className="backdrop" onClick={this.context.drawerClickHandler} />
@@ -31,4 +41,4 @@ class SideDrawer extends React.Component {
   }
 }
 
-export default SideDrawer;
+export default withRouter(SideDrawer);

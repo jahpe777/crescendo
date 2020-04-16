@@ -12,9 +12,13 @@ class NavBar extends React.Component {
   render() {
     return (
       <section className="navbar">
-        <div className="drawer-toggle-div">
-          <DrawerToggleButton />
-        </div>
+        {this.context.authToken ? (
+          <div className="drawer-toggle-div">
+            <DrawerToggleButton />
+          </div>
+        ) : (
+          ''
+        )}
 
         {this.context.authToken ? (
           ''

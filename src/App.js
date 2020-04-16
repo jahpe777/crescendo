@@ -48,7 +48,8 @@ class App extends Component {
         youtube: '',
         soundcloud: '',
         bandcamp: '',
-        contact_email: ''
+        contact_email: '',
+        band_slug: ''
       },
 
       shows: [],
@@ -281,7 +282,8 @@ class App extends Component {
               youtube: '',
               soundcloud: '',
               bandcamp: '',
-              contact_email: ''
+              contact_email: '',
+              band_slug: ''
             }
           },
           () => {
@@ -355,7 +357,11 @@ class App extends Component {
         <div className="App" style={{ height: '100%' }}>
           <header className="App-Header">
             <Route path="/" component={NavBar} />
-            {this.state.sideDrawerOpen ? <SideDrawer /> : ''}
+            {this.state.sideDrawerOpen ? (
+              <SideDrawer bandslug={this.state.userProfile.band_slug} />
+            ) : (
+              ''
+            )}
           </header>
           <main className="Header">
             <Route exact path="/" component={LandingPage} />
