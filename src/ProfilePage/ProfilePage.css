@@ -113,12 +113,8 @@ button.delete-video:hover {
   transition: 0.3s;
 }
 
-.listenpage {
-  height: 1165px;
-}
-
 .songs {
-  height: 420px;
+  height: 470px;
 }
 
 .shows-render {
@@ -128,11 +124,6 @@ button.delete-video:hover {
 
 .image-showspage {
   padding-bottom: 60px;
-}
-
-.image-songspage {
-  margin: 0px;
-  padding-bottom: 0px;
 }
 
 .submit-shows {
